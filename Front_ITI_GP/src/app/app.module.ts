@@ -30,14 +30,10 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
     ProductDetailsComponent,
     ProfileComponent,
     ResetPasswordComponent,
-    WishListComponent
+    WishListComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

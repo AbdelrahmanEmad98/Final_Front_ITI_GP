@@ -1,1 +1,47 @@
-<p>products works!</p>
+<div class="container" style="margin-top: 140px">
+  <h1>PRODUCTS</h1>
+
+  <ul>
+    <li class="list-unstyled" *ngFor="let product of products">
+      {{ product.name }}
+      {{ product.description }}
+      {{ product.price }}
+      {{ product.discount }}
+    </li>
+  </ul>
+</div>
+<!-- 
+<div class="tab-content">
+    <div class="text-center ">
+      <div class="row mt-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3" *ngFor="let product of filterCategory  | filter :searchKey: 'title' | paginate:{ id:'list_pagination',
+          itemsPerPage:10 ,currentPage: page, totalItems: totalRecords}">
+          <div class="card" style="width:100%;" (mouseover)="showButton = true" (mouseleave)="showButton = false">
+            <div class="imageselect add-clearfix image-imagebox">
+              <article class="imagebox">
+                <figure> <a routerLink="/products/{{product.id}}"><img class="card-img-top" src="{{product.image}}"
+                      alt="Card image cap" width="400" height="400">
+                    <figcaption *ngIf="showButton"> <span class="info">
+                      </span>
+                      <h4 class="caption-title" (click)="onclick()">Details</h4>
+                    </figcaption>
+                  </a>
+                </figure>
+              </article>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{product.title}}</h5>
+              <span class="fw-bold"> {{product.price}} EGP</span>
+              <div class="text-center overlay" (click)="clickk()" *ngIf="isLoadingg">
+                <img src="{{product.image}}" alt="Card image cap">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div> -->

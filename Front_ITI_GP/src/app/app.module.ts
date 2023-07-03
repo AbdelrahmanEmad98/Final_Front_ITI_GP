@@ -16,6 +16,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ErrorComponent } from './components/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,9 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
     ProductDetailsComponent,
     ProfileComponent,
     ResetPasswordComponent,
-    WishListComponent
+    WishListComponent,
+    AboutUsComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,4 +12,8 @@ export class CategoryService {
     return this.myClient.get(this.API_URL+"Category");
   }
 
+  GetParentCategories(){
+    return this.myClient.get(this.API_URL+"Category/ParentCategories");
+  }
+
 }

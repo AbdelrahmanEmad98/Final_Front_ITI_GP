@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   categories:any;
 constructor(private myService:CategoryService){}
   ngOnInit(): void {
-    this.myService.GetAllCategries().subscribe({
+    this.myService.GetParentCategories().subscribe({
       next:(data)=>
       {
         this.categories=data;
@@ -18,4 +18,8 @@ constructor(private myService:CategoryService){}
       error:(err)=>{console.log(err)}
     })
   }
+
+
+
+
 }

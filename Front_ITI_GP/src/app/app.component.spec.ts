@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ITI_AngularGP'`, () => {
+  it(`should have as title 'Front_ITI_GP'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ITI_AngularGP');
+    expect(app.title).toEqual('Front_ITI_GP');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ITI_AngularGP app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Front_ITI_GP app is running!');
   });
 });

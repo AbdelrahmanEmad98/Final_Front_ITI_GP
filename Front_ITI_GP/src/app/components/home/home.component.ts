@@ -8,6 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class HomeComponent implements OnInit {
   categories:any;
+  categories2:any;
 constructor(private myService:CategoryService){}
   ngOnInit(): void {
     this.myService.GetParentCategories().subscribe({
@@ -17,6 +18,18 @@ constructor(private myService:CategoryService){}
       },
       error:(err)=>{console.log(err)}
     })
+
+
+    this.myService.GetAllCategries().subscribe({
+      next:(data)=>
+      {
+        this.categories2=data;
+      },
+      error:(err)=>{console.log(err)}
+    })
+
+    
+
   }
 
 

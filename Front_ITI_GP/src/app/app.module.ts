@@ -16,6 +16,11 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+import { FilterPipe } from './Pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +36,16 @@ import { WishListComponent } from './components/wish-list/wish-list.component';
     ProfileComponent,
     ResetPasswordComponent,
     WishListComponent,
+    FilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule,
+    PaginationModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

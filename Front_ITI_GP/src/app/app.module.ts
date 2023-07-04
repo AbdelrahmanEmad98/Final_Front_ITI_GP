@@ -16,10 +16,22 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ErrorComponent } from './components/error/error.component';
-import { RatingModule } from 'ngx-bootstrap/rating';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import {
+  MatStepperModule,
+  matStepperAnimations,
+} from '@angular/material/stepper';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -43,8 +55,15 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RatingModule.forRoot(),
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatStepperModule,
     FormsModule,
+    MatTableModule,
+    NgxPaginationModule,
+    PaginationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

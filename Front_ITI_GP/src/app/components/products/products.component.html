@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 140px">
+<!-- <div class="container" style="margin-top: 140px">
   <h1>PRODUCTS</h1>
 
   <ul>
@@ -9,39 +9,409 @@
       {{ product.discount }}
     </li>
   </ul>
-</div>
-<!-- 
-<div class="tab-content">
-    <div class="text-center ">
-      <div class="row mt-3">
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3" *ngFor="let product of filterCategory  | filter :searchKey: 'title' | paginate:{ id:'list_pagination',
-          itemsPerPage:10 ,currentPage: page, totalItems: totalRecords}">
-          <div class="card" style="width:100%;" (mouseover)="showButton = true" (mouseleave)="showButton = false">
-            <div class="imageselect add-clearfix image-imagebox">
-              <article class="imagebox">
-                <figure> <a routerLink="/products/{{product.id}}"><img class="card-img-top" src="{{product.image}}"
-                      alt="Card image cap" width="400" height="400">
-                    <figcaption *ngIf="showButton"> <span class="info">
-                      </span>
-                      <h4 class="caption-title" (click)="onclick()">Details</h4>
-                    </figcaption>
-                  </a>
-                </figure>
-              </article>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{product.title}}</h5>
-              <span class="fw-bold"> {{product.price}} EGP</span>
-              <div class="text-center overlay" (click)="clickk()" *ngIf="isLoadingg">
-                <img src="{{product.image}}" alt="Card image cap">
+</div> -->
+
+<section id="collection" class="py-5">
+  <div class="col-md-4 mb-3 ms-auto">
+    <div class="input-group position-relative">
+      <input
+        class="form-control py-2 rounded-pill mr-1 pr-5"
+        type="search"
+        placeholder="Search Products..."
+        id="example-search-input"
+        [(ngModel)]="searchKey"
+      />
+      <span class="input-group-append" style="margin-left: 0">
+        <button
+          class="btn rounded-pill border-0 ml-n5 position-absolute"
+          type="button"
+          style="right: 1px; top: 3px; background-color: #eee"
+        >
+          <i class="bi bi-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="container" id="tab">
+    <div class="title text-center">
+      <h2 class="position-relative d-inline-block text-capitalize">
+        Men`s Cloths
+      </h2>
+    </div>
+    <ul
+      class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs"
+    >
+      <li class="nav-item">
+        <a class="btn m-3 active" (click)="filter('')" data-bs-toggle="tab"
+          >All</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="btn m-3"
+          (click)="filter('Men s T-Shirt')"
+          data-bs-toggle="tab"
+          >T-Shirts</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="btn m-3"
+          (click)="filter('1d53debe-03e6-487f-9b34-6b26c68fc1e5')"
+          data-bs-toggle="tab"
+          >Pants</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="btn m-3" (click)="filter('Jackets')" data-bs-toggle="tab"
+          >Jackets</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="btn m-3" (click)="filter('Hoodies')" data-bs-toggle="tab"
+          >Hoodies</a
+        >
+      </li>
+    </ul>
+    <div class="text-center">
+      <img *ngIf="isLoading" src="assets/Spinner-1s-200px.svg" alt="" />
+    </div>
+
+    <div class="tab-content">
+      <div class="text-center">
+        <div class="row mt-3">
+          <div
+            class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3"
+            *ngFor="
+              let product of filterCategory
+                | filter : searchKey : 'title'
+                | paginate
+                  : {
+                      id: 'list_pagination',
+                      itemsPerPage: 10,
+                      currentPage: page,
+                      totalItems: totalRecords
+                    }
+            "
+          >
+            <div
+              class="card"
+              style="width: 100%"
+              (mouseover)="showButton = true"
+              (mouseleave)="showButton = false"
+            >
+              <div class="imageselect add-clearfix image-imagebox">
+                <article class="imagebox">
+                  <figure>
+                    <a routerLink="/products/{{ product.productImages }}"
+                      ><img
+                        class="card-img-top"
+                        src="{{ product.productImages[0].imageURL }}"
+                        alt="Card image cap"
+                        width="400"
+                        height="400"
+                      />
+                      <figcaption *ngIf="showButton">
+                        <span class="info"> </span>
+                        <h4 class="caption-title" (click)="onclick()">
+                          Details
+                        </h4>
+                      </figcaption>
+                    </a>
+                  </figure>
+                </article>
               </div>
-
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <span class="fw-bold"> {{ product.description }} EGP</span>
+                <div
+                  class="text-center overlay"
+                  (click)="clickk()"
+                  *ngIf="isLoadingg"
+                >
+                  <img src="{{ product.image }}" alt="Card image cap" />
+                </div>
+              </div>
             </div>
-
           </div>
-
         </div>
       </div>
-
     </div>
-  </div> -->
+
+    <div class="text-center">
+      <pagination-controls
+        id="list_pagination"
+        (pageChange)="page = $event"
+        previousLabel="&lsaquo;"
+        nextLabel="&rsaquo;"
+        class="my-pagination"
+      ></pagination-controls>
+    </div>
+  </div>
+</section>
+
+<div class="d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="77"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>
+<!-- 
+<section class="ratio_asos section-b-space">
+  <div class="title2">
+    <h2 class="title-inner2">product style 1</h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="product-4 product-m no-arrow">
+          <div class="product-box">
+            <div class="img-wrapper">
+              <div class="front">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/27.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="back">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/28.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="cart-info cart-wrap">
+                <button
+                  data-toggle="modal"
+                  data-target="#addtocart"
+                  title="Add to cart"
+                >
+                  <i class="ti-shopping-cart"></i>
+                </button>
+                <a href="javascript:void(0)" title="Add to Wishlist"
+                  ><i class="ti-heart" aria-hidden="true"></i
+                ></a>
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#quick-view"
+                  title="Quick View"
+                  ><i class="ti-search" aria-hidden="true"></i
+                ></a>
+                <a href="compare.html" title="Compare"
+                  ><i class="ti-reload" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+            <div class="product-detail">
+              <div class="rating">
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <a href="product-page(no-sidebar).html">
+                <h6>Slim Fit Cotton Shirt</h6>
+              </a>
+              <h4>$500.00</h4>
+              <ul class="color-variant">
+                <li class="bg-light0"></li>
+                <li class="bg-light1"></li>
+                <li class="bg-light2"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper">
+              <div class="lable-block">
+                <span class="lable3">new</span>
+                <span class="lable4">on sale</span>
+              </div>
+              <div class="front">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/1.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="back">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/2.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="cart-info cart-wrap">
+                <button
+                  data-toggle="modal"
+                  data-target="#addtocart"
+                  title="Add to cart"
+                >
+                  <i class="ti-shopping-cart"></i>
+                </button>
+                <a href="javascript:void(0)" title="Add to Wishlist"
+                  ><i class="ti-heart" aria-hidden="true"></i
+                ></a>
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#quick-view"
+                  title="Quick View"
+                  ><i class="ti-search" aria-hidden="true"></i
+                ></a>
+                <a href="compare.html" title="Compare"
+                  ><i class="ti-reload" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+            <div class="product-detail">
+              <div class="rating">
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <a href="product-page(no-sidebar).html">
+                <h6>Slim Fit Cotton Shirt</h6>
+              </a>
+              <h4>$500.00</h4>
+              <ul class="color-variant">
+                <li class="bg-light0"></li>
+                <li class="bg-light1"></li>
+                <li class="bg-light2"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper">
+              <div class="front">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/33.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="back">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/34.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="cart-info cart-wrap">
+                <button
+                  data-toggle="modal"
+                  data-target="#addtocart"
+                  title="Add to cart"
+                >
+                  <i class="ti-shopping-cart"></i>
+                </button>
+                <a href="javascript:void(0)" title="Add to Wishlist"
+                  ><i class="ti-heart" aria-hidden="true"></i
+                ></a>
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#quick-view"
+                  title="Quick View"
+                  ><i class="ti-search" aria-hidden="true"></i
+                ></a>
+                <a href="compare.html" title="Compare"
+                  ><i class="ti-reload" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+            <div class="product-detail">
+              <div class="rating">
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <a href="product-page(no-sidebar).html">
+                <h6>Slim Fit Cotton Shirt</h6>
+              </a>
+              <h4>$500.00</h4>
+              <ul class="color-variant">
+                <li class="bg-light0"></li>
+                <li class="bg-light1"></li>
+                <li class="bg-light2"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-box">
+            <div class="img-wrapper">
+              <div class="lable-block">
+                <span class="lable3">new</span>
+                <span class="lable4">on sale</span>
+              </div>
+              <div class="front">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/35.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="back">
+                <a href="product-page(no-sidebar).html"
+                  ><img
+                    src="../assets/images/pro3/36.jpg"
+                    class="img-fluid blur-up lazyload bg-img"
+                    alt=""
+                /></a>
+              </div>
+              <div class="cart-info cart-wrap">
+                <button
+                  data-toggle="modal"
+                  data-target="#addtocart"
+                  title="Add to cart"
+                >
+                  <i class="ti-shopping-cart"></i>
+                </button>
+                <a href="javascript:void(0)" title="Add to Wishlist"
+                  ><i class="ti-heart" aria-hidden="true"></i
+                ></a>
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#quick-view"
+                  title="Quick View"
+                  ><i class="ti-search" aria-hidden="true"></i
+                ></a>
+                <a href="compare.html" title="Compare"
+                  ><i class="ti-reload" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+            <div class="product-detail">
+              <div class="rating">
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <a href="product-page(no-sidebar).html">
+                <h6>Slim Fit Cotton Shirt</h6>
+              </a>
+              <h4>$500.00</h4>
+              <ul class="color-variant">
+                <li class="bg-light0"></li>
+                <li class="bg-light1"></li>
+                <li class="bg-light2"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->

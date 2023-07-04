@@ -15,7 +15,15 @@ export class CategoryService {
     return this.myClient.get(this.API_URL + 'Category/ParentCategories');
   }
 
+<<<<<<< Updated upstream
   GetSubCategories(id: any) {
     return this.myClient.get(this.API_URL + 'Category/subCategories/' + id);
   }
+=======
+
+  GetAllSubCategoriesUnique(){
+    return this.myClient.get(this.API_URL+"Category/SubCategoriesUniqe");
+  }
+
+>>>>>>> Stashed changes
 }

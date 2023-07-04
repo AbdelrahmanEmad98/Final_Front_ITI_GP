@@ -9,7 +9,8 @@ import { CategoryService } from 'src/app/services/category.service';
 export class HomeComponent implements OnInit {
   categories:any;
   categories2:any;
-constructor(private myService:CategoryService){}
+  fillCategories:any;
+  constructor(private myService:CategoryService){}
   ngOnInit(): void {
     this.myService.GetParentCategories().subscribe({
       next:(data)=>
@@ -18,21 +19,23 @@ constructor(private myService:CategoryService){}
       },
       error:(err)=>{console.log(err)}
     })
-
-
-    this.myService.GetAllCategries().subscribe({
+    
+    
+    this.myService.GetAllSubCategoriesUnique().subscribe({
       next:(data)=>
       {
         this.categories2=data;
+        console.log(this.categories2);
+
+        this.fillCategories = this.categories2.filter((c: { name: string; }) => {
+          if (c.name === 'Men' || c.name === 'Women' || c.name === 'Kids') {
+            return false;
+          }
+          return true;
+        }).slice(0, 3);
+        console.log(this.fillCategories)
       },
       error:(err)=>{console.log(err)}
     })
-
-    
-
   }
-
-
-
-
 }

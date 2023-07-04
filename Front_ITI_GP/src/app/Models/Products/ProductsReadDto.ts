@@ -6,4 +6,5 @@ export default class ProductsReadDto {
   Discount: number = 0;
   Rate: number = 0;
   ProductImages: any;
+  imageURL: any;
 }

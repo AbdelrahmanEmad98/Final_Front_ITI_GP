@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/Models/Products/Product';
+import ProductsReadDto from 'src/app/Models/Products/ProductsReadDto';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +10,16 @@ import { Product } from 'src/app/Models/Products/Product';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getProducts(page: page) {
-    let params = new HttpParams();
+  getProductsPaginagtion(
+    page: number,
+    counterPerPage: number
+  ): Observable<ProductsReadDto> {
+    return this.http.get<ProductsReadDto>(
+      `https://localhost:7052/api/Products/Pagination/${page}/${counterPerPage}`
+    );
+  }
 
+  getProducts() {
     return this.http.get('https://localhost:7052/api/Products');
   }
 

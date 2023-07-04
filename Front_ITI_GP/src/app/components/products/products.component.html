@@ -12,7 +12,7 @@
 </div> -->
 
 <section id="collection" class="py-5">
-  <div class="col-md-4 mb-3 ms-auto">
+  <div class="col-md-3 mb-3 ms-auto">
     <div class="input-group position-relative">
       <input
         class="form-control py-2 rounded-pill mr-1 pr-5"
@@ -33,6 +33,7 @@
     </div>
   </div>
   <div class="container" id="tab">
+    <div></div>
     <div class="title text-center">
       <h2 class="position-relative d-inline-block text-capitalize">
         Men`s Cloths
@@ -73,64 +74,50 @@
         >
       </li>
     </ul>
-    <div class="text-center">
-      <img *ngIf="isLoading" src="assets/Spinner-1s-200px.svg" alt="" />
-    </div>
 
-    <div class="tab-content">
-      <div class="text-center">
-        <div class="row mt-3">
+    <div class="row tab-content">
+      <div class="col-3">dasdasda</div>
+      <div class="col-9 text-center">
+        <div class="mt-4" *ngIf="items" style="">
           <div
             class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3"
+            style="margin-left: 100px"
             *ngFor="
-              let product of filterCategory
+              let product of items
                 | filter : searchKey : 'title'
                 | paginate
                   : {
                       id: 'list_pagination',
-                      itemsPerPage: 10,
+                      itemsPerPage: counterPerPage,
                       currentPage: page,
-                      totalItems: totalRecords
+                      totalItems: totalCount
                     }
             "
           >
             <div
               class="card"
-              style="width: 100%"
-              (mouseover)="showButton = true"
-              (mouseleave)="showButton = false"
+              style="height: 572px; margin: 0; padding: 0; border: none"
             >
-              <div class="imageselect add-clearfix image-imagebox">
-                <article class="imagebox">
-                  <figure>
-                    <a routerLink="/products/{{ product.productImages }}"
-                      ><img
-                        class="card-img-top"
-                        src="{{ product.productImages[0].imageURL }}"
-                        alt="Card image cap"
-                        width="400"
-                        height="400"
-                      />
-                      <figcaption *ngIf="showButton">
-                        <span class="info"> </span>
-                        <h4 class="caption-title" (click)="onclick()">
-                          Details
-                        </h4>
-                      </figcaption>
-                    </a>
-                  </figure>
-                </article>
-              </div>
+              <article class="imagebox">
+                <figure style="height: 373">
+                  <a routerLink="/products/{{ product.id }}"
+                    ><img
+                      class="card-img-top"
+                      src="{{ product.productImages[0].imageURL }}"
+                      alt="Card image cap"
+                      height="373px"
+                    />
+
+                    <span class="info"> </span>
+                    <h4 class="caption-title" (click)="onclick()">Details</h4>
+                  </a>
+                </figure>
+              </article>
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
+                <h5 class="card-title">{{ product.price }}</h5>
                 <span class="fw-bold"> {{ product.description }} EGP</span>
-                <div
-                  class="text-center overlay"
-                  (click)="clickk()"
-                  *ngIf="isLoadingg"
-                >
-                  <img src="{{ product.image }}" alt="Card image cap" />
-                </div>
+                <div class="text-center overlay"></div>
               </div>
             </div>
           </div>
@@ -141,7 +128,7 @@
     <div class="text-center">
       <pagination-controls
         id="list_pagination"
-        (pageChange)="page = $event"
+        (pageChange)="getProducts($event)"
         previousLabel="&lsaquo;"
         nextLabel="&rsaquo;"
         class="my-pagination"
@@ -149,6 +136,13 @@
     </div>
   </div>
 </section>
+<!-- 
+<div class="has-text-centered">
+  <pagination-controls
+    (pageChange)="getProducts($event)"
+    id="server"
+  ></pagination-controls>
+</div>
 
 <div class="d-flex justify-content-center">
   <pagination
@@ -160,7 +154,7 @@
     lastText="&raquo;"
   >
   </pagination>
-</div>
+</div> -->
 <!-- 
 <section class="ratio_asos section-b-space">
   <div class="title2">

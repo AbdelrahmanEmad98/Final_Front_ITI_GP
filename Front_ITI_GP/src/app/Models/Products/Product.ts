@@ -5,4 +5,5 @@ export interface Product {
   price: number;
   discount: number;
   rate: number;
+  ProductImages: string;
 }

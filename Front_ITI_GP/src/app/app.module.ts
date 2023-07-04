@@ -16,20 +16,23 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
-<<<<<<< Updated upstream
+
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ErrorComponent } from './components/error/error.component';
-=======
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatStepperModule, matStepperAnimations } from '@angular/material/stepper';
+import {
+  MatStepperModule,
+  matStepperAnimations,
+} from '@angular/material/stepper';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
-
->>>>>>> Stashed changes
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,9 +61,11 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatStepperModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    NgxPaginationModule,
+    PaginationModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

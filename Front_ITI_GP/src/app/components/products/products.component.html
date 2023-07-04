@@ -78,13 +78,12 @@
     <div class="row tab-content">
       <div class="col-3">dasdasda</div>
       <div class="col-9 text-center">
-        <div class="mt-4" *ngIf="items" style="">
+        <div class="mt-4" *ngIf="items">
           <div
             class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3"
             style="margin-left: 100px"
             *ngFor="
               let product of items
-                | filter : searchKey : 'title'
                 | paginate
                   : {
                       id: 'list_pagination',

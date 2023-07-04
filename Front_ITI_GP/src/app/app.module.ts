@@ -16,8 +16,20 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
+<<<<<<< Updated upstream
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ErrorComponent } from './components/error/error.component';
+=======
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule, matStepperAnimations } from '@angular/material/stepper';
+import { FormsModule } from '@angular/forms';
+
+
+>>>>>>> Stashed changes
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +51,14 @@ import { ErrorComponent } from './components/error/error.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatStepperModule,
+    FormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

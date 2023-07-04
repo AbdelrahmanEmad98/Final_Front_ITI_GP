@@ -32,6 +32,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     MatTableModule,
     NgxPaginationModule,
     PaginationModule.forRoot(),
+    RatingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

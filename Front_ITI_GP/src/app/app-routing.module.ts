@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+<<<<<<< Updated upstream
 import { HomeComponent } from './components/home/home.component';
 import { SubCategoryComponent } from './components/sub-category/sub-category.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -19,6 +20,12 @@ const routes: Routes = [
   {path:"**",component:ErrorComponent}
 
 
+=======
+import { CartComponent } from './components/cart/cart.component';
+
+const routes: Routes = [
+  {path: "cart" , component:CartComponent}
+>>>>>>> Stashed changes
 ];
 
 @NgModule({

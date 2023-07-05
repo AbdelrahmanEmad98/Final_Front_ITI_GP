@@ -34,6 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { AdminPanelComponent } from './components/Admin - Components/admin-panel/admin-panel.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AdminPanelComponent } from './components/Admin - Components/admin-panel
     AboutUsComponent,
     ErrorComponent,
     AdminPanelComponent,
+    CheckOutComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,7 @@ import { AdminPanelComponent } from './components/Admin - Components/admin-panel
     NgxPaginationModule,
     PaginationModule.forRoot(),
     RatingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

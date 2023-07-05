@@ -22,9 +22,10 @@ export class ProductDetailsComponent implements OnInit {
   minQuantity: any = 1;
   colorValue: any;
   ImageCount: any;
+  addCart: any;
+  size: any;
 
   ngOnInit(): void {
-    console.log(this.location);
     this.productService.GetProductDetails(this.productId).subscribe({
       next: (data: any) => {
         this.product = data;
@@ -57,8 +58,7 @@ export class ProductDetailsComponent implements OnInit {
 
   QuantityCheck(size: any) {
     this.Quantity = 1;
-    console.log(size);
-    console.log(this.colorValue);
+    this.size = size;
     for (let i = 0; i < this.product.productInfo.length; i++) {
       if (this.product.productInfo[i].color == this.colorValue) {
         for (
@@ -69,7 +69,6 @@ export class ProductDetailsComponent implements OnInit {
           if (this.product.productInfo[i].sizeQuantities[j].size == size) {
             this.maxQuantity =
               this.product.productInfo[i].sizeQuantities[j].quantity;
-            console.log(this.maxQuantity);
           }
         }
       }
@@ -78,5 +77,18 @@ export class ProductDetailsComponent implements OnInit {
 
   GoBack() {
     this.location.back();
+  }
+
+  AddToCart() {
+    this.addCart = {
+      customerId: '9ac26f05-26e3-4fa0-aba8-82c82554c408',
+      productId: this.product.id,
+      productCount: this.Quantity,
+      color: this.colorValue,
+      size: this.size,
+    };
+    this.productService.AddtoCart(this.addCart).subscribe();
+
+    console.log(this.addCart);
   }
 }

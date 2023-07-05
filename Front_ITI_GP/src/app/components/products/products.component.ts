@@ -17,9 +17,14 @@ export class ProductsComponent implements OnInit {
     public route: ActivatedRoute
   ) {
     this.ID = route.snapshot.params['id'];
-
     console.log(this.ID);
   }
+  ///
+
+  parentCategories: any;
+  subcategories: any;
+  productsFromCategory: any;
+  ///;
   ID: any;
   products: any[] = [];
   page: number = 1;
@@ -34,9 +39,79 @@ export class ProductsComponent implements OnInit {
   items: any;
   itemsURL: [] = [];
 
-  counterPerPage = 8;
+  counterPerPage = 3;
   ngOnInit(): void {
     this.getProducts(1);
+    this.getParentCategories();
+  }
+  getParentCategories() {
+    this.myService.getParentCategories().subscribe({
+      next: (res) => {
+        this.parentCategories = res;
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getSubcategories(parentCategoryId: string) {
+    this.myService.getSubcategories(parentCategoryId).subscribe({
+      next: (res) => {
+        this.subcategories = res;
+        console.log(res);
+        this.items = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getProductsbyCategory(subcategoryId: string) {
+    this.myService.getProductsbyCategory(subcategoryId).subscribe({
+      next: (res) => {
+        this.productsFromCategory = res;
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getProductsByParentCategory(parentCategoryId: string) {
+    this.myService.getSubcategories(parentCategoryId).subscribe(
+      (subcategories) => {
+        const subcategoryIds = Object.values(subcategories).map(
+          (subcategory) => subcategory.id
+        );
+        this.myService.getProductsbyCategory(subcategoryIds).subscribe(
+          (products) => {
+            this.productsFromCategory = products;
+          },
+          (error) => {
+            console.error('Failed to retrieve products:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Failed to retrieve subcategories:', error);
+      }
+    );
+  }
+
+  getProductsByParentCategoryId(parentCategoryId: any) {
+    this.myService.getProductsByParentCategoryId(parentCategoryId).subscribe({
+      next: (res) => {
+        this.items = res;
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   getProducts(page: number) {
@@ -47,32 +122,107 @@ export class ProductsComponent implements OnInit {
         console.log(data);
 
         this.isLoading = false;
-        // this.products = data;
         this.totalCount = data.totalCount;
         this.items = data.items;
         console.log(this.items);
       });
   }
 
+  // filter(category: any) {
+  //   console.log(category);
+  //   console.log(typeof category);
+  //   if (category == '') {
+  //     this.getProducts(1);
+  //   }
+  //   this.myService.getProductsbyCategory(category).subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //       console.log(res);
+  //       this.items = res;
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
   filter(category: any) {
     console.log(category);
-    console.log(typeof category);
-    if (category == '') {
-      this.getProducts(1);
+    // console.log(typeof category);
+
+    if (category.parentCategory == '') {
+      this.myService.getProductsByParentCategoryId(category).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.items = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      this.myService.getProductsbyCategory(category).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.items = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
-    this.myService.getProductsbyCategory(category).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.filterCategory = res;
-        console.log(this.filterCategory);
-        console.log(this.filterCategory.price);
-        this.items = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
   }
+
+  // filter(category: any) {
+  //   console.log(category);
+  //   console.log(typeof category);
+  //   if (category === '') {
+  //     this.getProducts(1);
+  //   } else if (category === 'parentCategory') {
+  //     // Replace 'parentCategory' with the actual value you want to use to identify the parent category
+  //     this.myService.getParentCategories().subscribe({
+  //       next: (parentCategories) => {
+  //         for (const parentCategory of parentCategories) {
+  //           this.myService.getSubcategories(parentCategory.id).subscribe({
+  //             next: (subcategories) => {
+  //               const subcategoryIds = Object.values(subcategories).map(
+  //                 (subcategory) => subcategory.id
+  //               );
+  //               for (const subcategoryId of subcategoryIds) {
+  //                 this.myService
+  //                   .getProductsbyCategory(subcategoryId)
+  //                   .subscribe({
+  //                     next: (products) => {
+  //                       console.log(products);
+  //                       // Handle the retrieved products as needed
+  //                     },
+  //                     error: (err) => {
+  //                       console.log(err);
+  //                     },
+  //                   });
+  //               }
+  //             },
+  //             error: (err) => {
+  //               console.log(err);
+  //             },
+  //           });
+  //         }
+  //       },
+  //       error: (err) => {
+  //         console.log(err);
+  //       },
+  //     });
+  //   } else {
+  //     this.myService.getProductsbyCategory(category).subscribe({
+  //       next: (res) => {
+  //         console.log(res);
+  //         this.items = res;
+  //       },
+  //       error: (err) => {
+  //         console.log(err);
+  //       },
+  //     });
+  //   }
+  // }
 
   onclick() {
     console.log('hala');

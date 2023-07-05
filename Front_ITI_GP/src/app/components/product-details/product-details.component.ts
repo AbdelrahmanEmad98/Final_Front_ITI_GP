@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from 'src/app/services/Product Details/product-details.service';
 
 @Component({
@@ -7,7 +8,11 @@ import { ProductDetailsService } from 'src/app/services/Product Details/product-
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor(private productService: ProductDetailsService) {}
+  constructor(
+    private productService: ProductDetailsService,
+    private urlData: ActivatedRoute
+  ) {}
+  productId = this.urlData.snapshot.params['id'];
 
   product: any;
   ColorSizes: any;
@@ -18,18 +23,17 @@ export class ProductDetailsComponent implements OnInit {
   ImageCount: any;
 
   ngOnInit(): void {
-    this.productService
-      .GetProductDetails('0b738714-22a5-4d91-bdec-1170480b7caa')
-      .subscribe({
-        next: (data: any) => {
-          this.product = data;
-          this.ColorSizes = data.productInfo[0];
-          this.colorValue = data.productInfo[0].color;
-          this.maxQuantity = data.productInfo[0].sizeQuantities[0].quantity;
-          this.ImageCount = this.product.productImages.Count;
-        },
-        error: () => {},
-      });
+    this.productService.GetProductDetails(this.productId).subscribe({
+      next: (data: any) => {
+        this.product = data;
+        console.log(this.product);
+        this.ColorSizes = data.productInfo[0];
+        this.colorValue = data.productInfo[0].color;
+        this.maxQuantity = data.productInfo[0].sizeQuantities[0].quantity;
+        this.ImageCount = this.product.productImages.Count;
+      },
+      error: () => {},
+    });
   }
 
   Sizes(value: any) {

@@ -29,10 +29,11 @@ import {
   MatStepperModule,
   matStepperAnimations,
 } from '@angular/material/stepper';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { CheckOutComponent } from './components/check-out/check-out.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     WishListComponent,
     AboutUsComponent,
     ErrorComponent,
+    CheckOutComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     NgxPaginationModule,
     PaginationModule.forRoot(),
     RatingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

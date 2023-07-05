@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit {
   items: any;
   itemsURL: [] = [];
 
-  counterPerPage = 3;
+  counterPerPage = 10;
   ngOnInit(): void {
     this.getProducts(1);
     this.getParentCategories();
@@ -128,26 +128,8 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  // filter(category: any) {
-  //   console.log(category);
-  //   console.log(typeof category);
-  //   if (category == '') {
-  //     this.getProducts(1);
-  //   }
-  //   this.myService.getProductsbyCategory(category).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       console.log(res);
-  //       this.items = res;
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
   filter(category: any) {
     console.log(category);
-    // console.log(typeof category);
 
     if (category.parentCategory == '') {
       this.myService.getProductsByParentCategoryId(category).subscribe({
@@ -171,70 +153,87 @@ export class ProductsComponent implements OnInit {
       });
     }
   }
-
-  // filter(category: any) {
-  //   console.log(category);
-  //   console.log(typeof category);
-  //   if (category === '') {
-  //     this.getProducts(1);
-  //   } else if (category === 'parentCategory') {
-  //     // Replace 'parentCategory' with the actual value you want to use to identify the parent category
-  //     this.myService.getParentCategories().subscribe({
-  //       next: (parentCategories) => {
-  //         for (const parentCategory of parentCategories) {
-  //           this.myService.getSubcategories(parentCategory.id).subscribe({
-  //             next: (subcategories) => {
-  //               const subcategoryIds = Object.values(subcategories).map(
-  //                 (subcategory) => subcategory.id
-  //               );
-  //               for (const subcategoryId of subcategoryIds) {
-  //                 this.myService
-  //                   .getProductsbyCategory(subcategoryId)
-  //                   .subscribe({
-  //                     next: (products) => {
-  //                       console.log(products);
-  //                       // Handle the retrieved products as needed
-  //                     },
-  //                     error: (err) => {
-  //                       console.log(err);
-  //                     },
-  //                   });
-  //               }
-  //             },
-  //             error: (err) => {
-  //               console.log(err);
-  //             },
-  //           });
-  //         }
-  //       },
-  //       error: (err) => {
-  //         console.log(err);
-  //       },
-  //     });
-  //   } else {
-  //     this.myService.getProductsbyCategory(category).subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.items = res;
-  //       },
-  //       error: (err) => {
-  //         console.log(err);
-  //       },
-  //     });
-  //   }
-  // }
-
-  onclick() {
-    console.log('hala');
-    this.isLoadingg = true;
-  }
-
-  clickk() {
-    console.log('hala');
-    setInterval(() => {}, 1000);
-    this.isLoadingg = false;
-  }
 }
+// filter(category: any) {
+//   console.log(category);
+//   console.log(typeof category);
+//   if (category == '') {
+//     this.getProducts(1);
+//   }
+//   this.myService.getProductsbyCategory(category).subscribe({
+//     next: (res) => {
+//       console.log(res);
+//       console.log(res);
+//       this.items = res;
+//     },
+//     error: (err) => {
+//       console.log(err);
+//     },
+//   });
+// }
+// filter(category: any) {
+//   console.log(category);
+//   console.log(typeof category);
+//   if (category === '') {
+//     this.getProducts(1);
+//   } else if (category === 'parentCategory') {
+//     // Replace 'parentCategory' with the actual value you want to use to identify the parent category
+//     this.myService.getParentCategories().subscribe({
+//       next: (parentCategories) => {
+//         for (const parentCategory of parentCategories) {
+//           this.myService.getSubcategories(parentCategory.id).subscribe({
+//             next: (subcategories) => {
+//               const subcategoryIds = Object.values(subcategories).map(
+//                 (subcategory) => subcategory.id
+//               );
+//               for (const subcategoryId of subcategoryIds) {
+//                 this.myService
+//                   .getProductsbyCategory(subcategoryId)
+//                   .subscribe({
+//                     next: (products) => {
+//                       console.log(products);
+//                       // Handle the retrieved products as needed
+//                     },
+//                     error: (err) => {
+//                       console.log(err);
+//                     },
+//                   });
+//               }
+//             },
+//             error: (err) => {
+//               console.log(err);
+//             },
+//           });
+//         }
+//       },
+//       error: (err) => {
+//         console.log(err);
+//       },
+//     });
+//   } else {
+//     this.myService.getProductsbyCategory(category).subscribe({
+//       next: (res) => {
+//         console.log(res);
+//         this.items = res;
+//       },
+//       error: (err) => {
+//         console.log(err);
+//       },
+//     });
+//   }
+// }
+
+//   onclick() {
+//     console.log('hala');
+//     this.isLoadingg = true;
+//   }
+
+//   clickk() {
+//     console.log('hala');
+//     setInterval(() => {}, 1000);
+//     this.isLoadingg = false;
+//   }
+// }
 
 // @Component({
 //   selector: 'app-products',
@@ -323,4 +322,3 @@ export class ProductsComponent implements OnInit {
 //     setInterval(() => {}, 1000);
 //     this.isLoadingg = false;
 //   }
-// }

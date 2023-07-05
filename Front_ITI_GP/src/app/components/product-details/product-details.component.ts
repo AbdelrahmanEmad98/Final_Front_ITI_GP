@@ -19,7 +19,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService
-      .GetProductDetails('7d420050-797d-4aa7-a347-0816ae695492')
+      .GetProductDetails('0b738714-22a5-4d91-bdec-1170480b7caa')
       .subscribe({
         next: (data: any) => {
           this.product = data;

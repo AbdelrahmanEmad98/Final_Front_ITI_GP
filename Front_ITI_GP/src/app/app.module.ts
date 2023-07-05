@@ -65,7 +65,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     MatTableModule,
     NgxPaginationModule,
     PaginationModule.forRoot(),
-    RatingModule,
+    RatingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -28,4 +28,11 @@ export class ProductsService {
       `https://localhost:7052/api/Category/PrdouctsByCategoryId/${id}`
     );
   }
+
+  getProductsUnique(id: any) {
+    return this.http.get(
+      `https://localhost:7052/api/Products/UniqueProducts`
+    );
+  }
+
 }

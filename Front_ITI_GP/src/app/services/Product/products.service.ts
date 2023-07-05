@@ -23,9 +23,27 @@ export class ProductsService {
     return this.http.get('https://localhost:7052/api/Products');
   }
 
-  getProductsbyCategory(id: any) {
+  getProductsbyCategory(subCategoryId: any) {
     return this.http.get(
-      `https://localhost:7052/api/Category/PrdouctsByCategoryId/${id}`
+      `https://localhost:7052/api/Category/PrdouctsForCategory/${subCategoryId}`
+    );
+  }
+
+  getParentCategories(): Observable<any> {
+    return this.http.get(
+      'https://localhost:7052/api/Category/ParentCategories'
+    );
+  }
+
+  getSubcategories(parentCategoryId: any) {
+    return this.http.get(
+      `https://localhost:7052/api/Category/subCategories/${parentCategoryId}`
+    );
+  }
+
+  getProductsByParentCategoryId(parentCategoryId: any) {
+    return this.http.get(
+      `https://localhost:7052/api/Category/PrdouctByParentCategory/${parentCategoryId}`
     );
   }
 

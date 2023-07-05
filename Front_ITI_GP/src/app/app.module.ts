@@ -33,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { AdminPanelComponent } from './components/Admin - Components/admin-panel/admin-panel.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
     WishListComponent,
     AboutUsComponent,
     ErrorComponent,
-    CheckOutComponent,
+    AdminPanelComponent,
+    CheckOutComponent
   ],
   imports: [
     BrowserModule,

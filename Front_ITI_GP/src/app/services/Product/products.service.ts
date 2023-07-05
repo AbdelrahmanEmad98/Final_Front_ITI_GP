@@ -48,9 +48,6 @@ export class ProductsService {
   }
 
   getProductsUnique(id: any) {
-    return this.http.get(
-      `https://localhost:7052/api/Products/UniqueProducts`
-    );
+    return this.http.get(`https://localhost:7052/api/Products/UniqueProducts`);
   }
-
 }

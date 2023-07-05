@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,16 +12,18 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent implements OnInit {
   cartItems: any[]=[];
   displayedColumns: string[] = ['image', 'name', 'price', 'color', 'size', 'quantity', 'actions'];
-  totalPrice: any;
+  totalPriceBefore: any;
+  totalPriceAfter: any;
+  cart:any;
   
 
-  constructor( private myService: CartService) {}
+  constructor( private myService: CartService ,public route:Router) {}
 
   ngOnInit() {
     this.myService.getCartProductsByCustomerId('c7d3e80a-7a4a-4c54-91a6-89c0df051c94').subscribe(
-      (response: any) => {
+      (response) => {
 
-
+        this.cart=response;
         console.log(response);
 
         this.cartItems = response.products.map((item: any) => ({
@@ -28,12 +31,14 @@ export class CartComponent implements OnInit {
           name: item.name,
           price: item.price,
           quantity: item.quantity,
-          totalPrice: item.price * item.quantity,
+          totalPriceBefor: item.price * item.quantity ,
+          totalPriceAfter: item.price * item.quantity * item.discount,
           quantityInStock : item.quantityInStock,
           color: item.color, 
           size: item.size ,
           productId:item.productId,
-          cartId:response.cartId
+          cartId:response.cartId,
+          discount:item.discount
         }));
         console.log(this.cartItems)
         this.calculateTotalPrice(); 
@@ -47,22 +52,20 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotalPrice() {
-    this.totalPrice = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    this.totalPriceBefore = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    this.cartItems.forEach(c => {
+      if(c.discount==0){
+        this.totalPriceAfter = c.price * c.quantity;
+      }
+
+      else{
+        console.log(c.price * c.quantity *.9);
+        this.totalPriceAfter =c.price * c.quantity * (1-c.discount);
+      }
+
+    });
   }
 
-  /*updateTotalPrice(item: any) {
-    item.totalPrice = item.price * item.quantity;
-    this.myService.updateCartProduct(item.productId, item.cartId, item.quantity).subscribe(
-      (response) => {
-        console.log('Cart updated successfully');
-      },
-      
-      (error) => {
-        console.error('Failed to update cart', error);
-        this.calculateTotalPrice(); 
-      }
-    );
-  }*/
   
 
   decreaseQuantity(item: any) {
@@ -84,18 +87,7 @@ export class CartComponent implements OnInit {
   }
 
 
-  // deleteCartItem(productId: string) {
-  //   const cartId = '0f75f042-ee17-4fd3-b8e4-9a03869449ac';
-  //   this.myService.deleteCartProduct(cartId, productId).subscribe(
-  //     () => {
-  //       console.log('Item deleted');
-  //     },
-  //     (error: any) => {
-  //       console.error('Failed to delete item', error);
-  //     }
-  //   );
-  // }
-
+  
   deleteItem:any;
   deleteCartItem(item:any) {
     const cartId = 'c7d3e80a-7a4a-4c54-91a6-89c0df051c94';
@@ -111,22 +103,26 @@ export class CartComponent implements OnInit {
       () => {
         console.log('Item deleted');
         this.calculateTotalPrice(); // Recalculate the total price
+        this.ngOnInit();
       },
       (error: any) => {
         console.error('Failed to delete item', error);
         this.calculateTotalPrice(); 
 
       }
+
     );
+    
+    
   }
   
-  
-
-  deleteCart(cartId: string) {
-    this.myService.deleteCart(cartId).subscribe(
+  deleteCart() {
+    console.log(this.cart.cartId);
+    this.myService.deleteCart(this.cart.cartId).subscribe(
       () => {
         console.log('Cart deleted');
         this.cartItems = [];
+        this.ngOnInit();
       },
       (error: any) => {
         console.error('Failed to delete cart', error);
@@ -137,8 +133,8 @@ export class CartComponent implements OnInit {
   }
 
   checkout() { 
-    const cartId = '0f75f042-ee17-4fd3-b8e4-9a03869449ac';
-    this.deleteCart(cartId);
+    let cartId = this.cart.customerId;
+    
   }
   
 

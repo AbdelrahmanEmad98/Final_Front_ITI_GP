@@ -18,11 +18,12 @@ export class CartService {
     const options = {
       body: item,
     };
-    return this.myClient.delete("https://localhost:7052/api/Cart/DeletePrdouctFromCart",options);
+    return this.myClient.delete(this.API_URL+"Cart/DeletePrdouctFromCart",options);
   }
 
-  deleteCart(cartId: string) {
-    return this.myClient.delete<any>(`${this.API_URL}cart/${cartId}`);
+  deleteCart(cartId: any) {
+    console.log("dsad"+cartId);
+    return this.myClient.delete(`${this.API_URL}Cart/${cartId}`);
   }
 
   updateCartProduct(productId: string, cartId: string, quantity: number) {

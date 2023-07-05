@@ -48,14 +48,7 @@ export class ProductsComponent implements OnInit {
       },
     });
 
-    this.myService.getProductsByParentCategoryId(this.CategoryId).subscribe({
-      next: (res) => {
-        this.productsofSub = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.GetAll();
   }
 
   getProductsbyCategory(subcategoryId: string) {
@@ -69,6 +62,17 @@ export class ProductsComponent implements OnInit {
       },
     });
     console.log(this.productsofSub);
+  }
+
+  GetAll() {
+    this.myService.getProductsByParentCategoryId(this.CategoryId).subscribe({
+      next: (res) => {
+        this.productsofSub = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   // getProducts(page: number) {

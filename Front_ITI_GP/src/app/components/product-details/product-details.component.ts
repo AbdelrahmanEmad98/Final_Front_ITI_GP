@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from 'src/app/services/Product Details/product-details.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -10,7 +10,8 @@ import { ProductDetailsService } from 'src/app/services/Product Details/product-
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private productService: ProductDetailsService,
-    private urlData: ActivatedRoute
+    private urlData: ActivatedRoute,
+    private location: Location
   ) {}
   productId = this.urlData.snapshot.params['id'];
 
@@ -23,10 +24,10 @@ export class ProductDetailsComponent implements OnInit {
   ImageCount: any;
 
   ngOnInit(): void {
+    console.log(this.location);
     this.productService.GetProductDetails(this.productId).subscribe({
       next: (data: any) => {
         this.product = data;
-        console.log(this.product);
         this.ColorSizes = data.productInfo[0];
         this.colorValue = data.productInfo[0].color;
         this.maxQuantity = data.productInfo[0].sizeQuantities[0].quantity;
@@ -73,5 +74,9 @@ export class ProductDetailsComponent implements OnInit {
         }
       }
     }
+  }
+
+  GoBack() {
+    this.location.back();
   }
 }

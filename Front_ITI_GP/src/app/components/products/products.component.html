@@ -12,13 +12,18 @@
     </div>
   </div> -->
   <div class="container" id="tab">
-    <div>
-      <ul class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs">
-        <li class="nav-item" *ngFor="let category of subCategories">
-          <button #sub class="btn m-3" value="{{category.id}}" (click)="getProductsbyCategory(sub.value)">{{
-            category.name }}</button>
-        </li>
-      </ul>
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <button class="btn m-3" (click)="GetAll()">All Products</button>
+      </div>
+      <div class="col-6">
+        <ul class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs">
+          <li class="nav-item" *ngFor="let category of subCategories">
+            <button #sub class="btn m-3" value="{{category.id}}" (click)="getProductsbyCategory(sub.value)">{{
+              category.name }}</button>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- <div class="row tab-content">
       <h1 class="col-3">filter</h1>

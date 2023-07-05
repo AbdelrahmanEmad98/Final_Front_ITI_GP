@@ -14,8 +14,11 @@ export class CartService {
     return this.myClient.get<any>(`${this.API_URL}cart/${customerId}`);
   }
 
-  deleteCartProduct(cartId: string, productId: string) {
-    return this.myClient.delete<any>(`${this.API_URL}cart/${cartId}/${productId}`);
+  deleteCartProduct(item:any) {
+    const options = {
+      body: item,
+    };
+    return this.myClient.delete("https://localhost:7052/api/Cart/DeletePrdouctFromCart",options);
   }
 
   deleteCart(cartId: string) {

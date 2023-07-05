@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ErrorComponent } from './components/error/error.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'aboutUs', component: AboutUsComponent },
   { path: 'cart', component: CartComponent },
   { path:'checkout',component: CheckOutComponent},
+  { path:'productdetails/:id',component: ProductDetailsComponent},
+
   { path: '**', component: ErrorComponent }
 ];
 

@@ -46,4 +46,11 @@ export class ProductsService {
       `https://localhost:7052/api/Category/PrdouctByParentCategory/${parentCategoryId}`
     );
   }
+
+  getProductsUnique(id: any) {
+    return this.http.get(
+      `https://localhost:7052/api/Products/UniqueProducts`
+    );
+  }
+
 }

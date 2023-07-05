@@ -20,6 +20,6 @@ export class CategoryService {
   }
 
   GetAllSubCategoriesUnique() {
-    return this.myClient.get(this.API_URL + 'Category/SubCategoriesUniqe');
+    return this.myClient.get(this.API_URL + 'Category/CategoryUnique');
   }
 }

@@ -56,19 +56,9 @@
       </div>
   </div>
   <div class="row">
-      <div class="col-12 col-md-4 p-5 mt-3">
+      <div *ngFor="let c of fillCategories" class="col-12 col-md-4 p-5 mt-3">
           <a href="#"><img src="../../../assets/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-          <h5 class="text-center mt-3 mb-3">Watches</h5>
-          <p class="text-center"><a class="btn btn-dark">Go Shop</a></p>
-      </div>
-      <div class="col-12 col-md-4 p-5 mt-3">
-          <a href="#"><img src="../../../assets/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
-          <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-          <p class="text-center"><a class="btn btn-dark">Go Shop</a></p>
-      </div>
-      <div class="col-12 col-md-4 p-5 mt-3">
-          <a href="#"><img src="../../../assets/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
-          <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
+          <h2 class="h5 text-center mt-3 mb-3">{{c.name}}</h2>
           <p class="text-center"><a class="btn btn-dark">Go Shop</a></p>
       </div>
   </div>
@@ -76,17 +66,6 @@
 <!-- End Categories of The Month -->
 
 
- <!--start categories-->
- <div class="container-fluid mt-5">
-  <div class="row justify-content-center">
-          <div *ngFor=" let c of fillCategories " class="card text-bg-light col-3 m-2 p-2 border-0  ">
-              <img src={{c.image}} class="card-img "style="height:600px" alt="...">
-              <div class="card-img-overlay">
-                  <h5 >{{c.name}}</h5>
-              </div>
-          </div>
-  </div>
-</div>
 
 
 <!--Try-->

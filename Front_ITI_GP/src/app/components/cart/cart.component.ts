@@ -24,8 +24,8 @@ export class CartComponent implements OnInit {
       (response) => {
 
         this.cart=response;
+        
         console.log(response);
-
         this.cartItems = response.products.map((item: any) => ({
           image: item.image || '',
           name: item.name,
@@ -40,7 +40,7 @@ export class CartComponent implements OnInit {
           cartId:response.cartId,
           discount:item.discount
         }));
-        console.log(this.cartItems)
+        console.log("hgjhjghjghjg"+this.cartItems)
         this.calculateTotalPrice(); 
 
       },
@@ -52,6 +52,11 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotalPrice() {
+    console.log("try");
+    console.log(this.cartItems != null);
+    console.log(this.cartItems.length == 0);
+    console.log(this.cartItems );
+    if(this.cartItems.length != 0){
     this.totalPriceBefore = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     this.cartItems.forEach(c => {
       if(c.discount==0){
@@ -62,8 +67,13 @@ export class CartComponent implements OnInit {
         console.log(c.price * c.quantity *.9);
         this.totalPriceAfter =c.price * c.quantity * (1-c.discount);
       }
+    
 
     });
+  }else{
+    this.totalPriceBefore=0
+    this.totalPriceAfter=0
+  }
   }
 
   

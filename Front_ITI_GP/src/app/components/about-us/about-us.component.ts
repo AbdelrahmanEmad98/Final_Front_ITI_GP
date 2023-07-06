@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CustomerService } from 'src/app/services/Customer/customer.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.css'],
+  styleUrls: ['./about-us.component.css']
 })
-export class AboutUsComponent implements OnInit {
-  dataArray: string[] = [];
-  constructor(private _ser: CustomerService) {}
+export class AboutUsComponent {
 
-  ngOnInit(): void {
-    this._ser.getTestData().subscribe((value) => (this.dataArray = value));
-  }
 }

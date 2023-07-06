@@ -1,18 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CustomerService } from './services/Customer/customer.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  constructor(private authenticationService: CustomerService) {}
-
-  ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.authenticationService.isLoggedIn$.next(true);
-    }
-  }
+export class AppComponent {
   title = 'Front_ITI_GP';
 }

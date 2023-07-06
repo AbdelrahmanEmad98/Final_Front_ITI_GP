@@ -14,9 +14,16 @@ export class ProductDetailsService {
     return this.productData.get(this.baseUrl + 'ColorDistinct/' + id);
   }
 
-  FilterProductByColor(queryParam: any): Observable<any> {
-    return this.productData.get(
-      this.baseUrl + 'FillterByColor' + `?Id=${queryParam}`
+  // FilterProductByColor(queryParam: any): Observable<any> {
+  //   return this.productData.get(
+  //     this.baseUrl + 'FillterByColor' + `?Id=${queryParam}`
+  //   );
+  // }
+
+  AddtoCart(product: any) {
+    return this.productData.post(
+      'https://localhost:7052/api/Cart/9ac26f05-26e3-4fa0-aba8-82c82554c408',
+      product
     );
   }
 }

@@ -14,12 +14,16 @@ export class CartService {
     return this.myClient.get<any>(`${this.API_URL}cart/${customerId}`);
   }
 
-  deleteCartProduct(cartId: string, productId: string) {
-    return this.myClient.delete<any>(`${this.API_URL}cart/${cartId}/${productId}`);
+  deleteCartProduct(item:any) {
+    const options = {
+      body: item,
+    };
+    return this.myClient.delete(this.API_URL+"Cart/DeletePrdouctFromCart",options);
   }
 
-  deleteCart(cartId: string) {
-    return this.myClient.delete<any>(`${this.API_URL}cart/${cartId}`);
+  deleteCart(cartId: any) {
+    console.log("dsad"+cartId);
+    return this.myClient.delete(`${this.API_URL}Cart/${cartId}`);
   }
 
   updateCartProduct(productId: string, cartId: string, quantity: number) {

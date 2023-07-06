@@ -1,72 +1,36 @@
 <section id="collection" class="py-5">
-  <div class="col-md-3 mb-3 ms-auto">
+  <!-- <div class="col-md-3 mb-3 ms-auto">
     <div class="input-group position-relative">
-      <input
-        class="form-control py-2 rounded-pill mr-1 pr-5"
-        type="search"
-        placeholder="Search Products..."
-        id="example-search-input"
-        [(ngModel)]="searchKey"
-      />
+      <input class="form-control py-2 rounded-pill mr-1 pr-5" type="search" placeholder="Search Products..."
+        id="example-search-input" [(ngModel)]="searchKey" />
       <span class="input-group-append" style="margin-left: 0">
-        <button
-          class="btn rounded-pill border-0 ml-n5 position-absolute"
-          type="button"
-          style="right: 1px; top: 3px; background-color: #eee"
-        >
+        <button class="btn rounded-pill border-0 ml-n5 position-absolute" type="button"
+          style="right: 1px; top: 3px; background-color: #eee">
           <i class="bi bi-search"></i>
         </button>
       </span>
     </div>
-  </div>
+  </div> -->
   <div class="container" id="tab">
-    <div></div>
-    <div class="title text-center">
-      <h2 class="position-relative d-inline-block text-capitalize">
-        Men`s Cloths
-      </h2>
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <button class="btn m-3" (click)="GetAll()">All Products</button>
+      </div>
+      <div class="col-6">
+        <ul class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs">
+          <li class="nav-item" *ngFor="let category of subCategories">
+            <button #sub class="btn m-3" value="{{category.id}}" (click)="getProductsbyCategory(sub.value)">{{
+              category.name }}</button>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <div>
-      <h2 class="text-center">Parent Categories</h2>
-      <ul
-        class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs"
-      >
-        <li
-          class="nav-item"
-          *ngFor="let category of parentCategories"
-          (click)="getSubcategories(category.id)"
-          (click)="getProductsByParentCategoryId(category.id)"
-        >
-          <a class="btn m-3">{{ category.name }}</a>
-        </li>
-      </ul>
-    </div>
-    <ul
-      class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs"
-    >
-      <li
-        class="nav-item"
-        *ngFor="let subcategory of subcategories"
-        (click)="getProductsbyCategory(subcategory.id)"
-      >
-        <a
-          class="btn m-3"
-          (click)="filter(subcategory.id)"
-          data-bs-toggle="tab"
-          >{{ subcategory.name }}</a
-        >
-      </li>
-    </ul>
-
-    <div class="row tab-content">
+    <!-- <div class="row tab-content">
       <h1 class="col-3">filter</h1>
       <div class="col-9 text-center">
         <div class="mt-4" *ngIf="items">
           <div class="row">
-            <div
-              class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3"
-              *ngFor="
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3" *ngFor="
                 let product of items
                   | paginate
                     : {
@@ -75,85 +39,31 @@
                         currentPage: page,
                         totalItems: totalCount
                       }
-              "
-            >
-              <div
-                class="card"
-                style="height: 572px; margin: 0; padding: 0; border: none"
-                *ngIf="product.productImages"
-              >
-                <article class="imagebox">
-                  <figure style="height: 373">
-                    <a routerLink="/products/Details/{{ product.id }}"
-                      ><img
-                        *ngIf="product.productImages.Length > 0"
-                        class="card-img-top"
-                        src="{{ product.productImages[0].imageURL }}"
-                        alt="Card image cap"
-                        height="373px"
-                      />
-                    </a>
-                  </figure>
-                </article>
-                <p class="Details btn btn-secondary m-0">
-                  <a
-                    style="text-decoration: none; color: white"
-                    routerLink="/products/Details/{{ product.id }}"
-                  >
-                    Details</a
-                  >
-                </p>
-                <div class="card-body">
-                  <h2 class="m-0">{{ product.name }}</h2>
-                  <div class="row d-flex space-around">
-                    <h3 class="col-6 m-0">{{ product.price }} EGP</h3>
-                    <h2
-                      class="col-6 m-0"
-                      style="color: red; text-decoration: line-through"
-                    >
-                      {{
-                        (
-                          product.price * product.discount +
-                          product.price
-                        ).toFixed(2)
-                      }}
-                    </h2>
-                  </div>
-
-                  <button class="button">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      viewBox="0 0 24 24"
-                      height="24"
-                      fill="none"
-                      class="svg-icon"
-                    >
-                      <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-                        <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                        <path d="m8 3v4"></path>
-                        <path d="m16 3v4"></path>
-                        <path d="m4 11h16"></path>
-                      </g>
-                    </svg>
-                    <span class="lable">Add to Cart</span>
-                  </button>
-                </div>
+              "> -->
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="card col-3 p-0 me-1" *ngFor="let product of productsofSub">
+          <div class="bg-image hover-overlay ripple col-12" data-mdb-ripple-color="light">
+            <img src="{{product.productImages[0].imageURL}}" class="img-fluid" />
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">{{product.name}}</h2>
+            <div class="row">
+              <p class="h5 -2 col-6">{{product.price*(1-product.discount) | number:'1.0-2'}} EGP</p>
+              <div *ngIf="product.discount>0" class="col-6">
+                <p class="h5 py-2 text-decoration-line-through text-danger m-0">
+                  {{product.price | number:'1.0-2'}} EGP</p>
               </div>
             </div>
+            <a routerLink="/products/Details/{{ product.id }}" class="btn btn-primary">Details</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="text-center">
-    <pagination-controls
-      id="list_pagination"
-      (pageChange)="getProducts($event)"
-      previousLabel="&lsaquo;"
-      nextLabel="&rsaquo;"
-      class="my-pagination"
-    ></pagination-controls>
+    <!-- <div class="text-center">
+    <pagination-controls id="list_pagination" (pageChange)="getProducts($event)" previousLabel="&lsaquo;"
+      nextLabel="&rsaquo;" class="my-pagination"></pagination-controls>
+  </div>  -->
   </div>
 </section>

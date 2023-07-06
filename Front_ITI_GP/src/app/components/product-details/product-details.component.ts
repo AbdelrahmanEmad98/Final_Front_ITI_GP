@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetailsService } from 'src/app/services/Product Details/product-details.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -10,7 +10,8 @@ import { ProductDetailsService } from 'src/app/services/Product Details/product-
 export class ProductDetailsComponent implements OnInit {
   constructor(
     private productService: ProductDetailsService,
-    private urlData: ActivatedRoute
+    private urlData: ActivatedRoute,
+    private location: Location
   ) {}
   productId = this.urlData.snapshot.params['id'];
 
@@ -21,12 +22,13 @@ export class ProductDetailsComponent implements OnInit {
   minQuantity: any = 1;
   colorValue: any;
   ImageCount: any;
+  addCart: any;
+  size: any;
 
   ngOnInit(): void {
     this.productService.GetProductDetails(this.productId).subscribe({
       next: (data: any) => {
         this.product = data;
-        console.log(this.product);
         this.ColorSizes = data.productInfo[0];
         this.colorValue = data.productInfo[0].color;
         this.maxQuantity = data.productInfo[0].sizeQuantities[0].quantity;
@@ -56,8 +58,7 @@ export class ProductDetailsComponent implements OnInit {
 
   QuantityCheck(size: any) {
     this.Quantity = 1;
-    console.log(size);
-    console.log(this.colorValue);
+    this.size = size;
     for (let i = 0; i < this.product.productInfo.length; i++) {
       if (this.product.productInfo[i].color == this.colorValue) {
         for (
@@ -68,10 +69,26 @@ export class ProductDetailsComponent implements OnInit {
           if (this.product.productInfo[i].sizeQuantities[j].size == size) {
             this.maxQuantity =
               this.product.productInfo[i].sizeQuantities[j].quantity;
-            console.log(this.maxQuantity);
           }
         }
       }
     }
+  }
+
+  GoBack() {
+    this.location.back();
+  }
+
+  AddToCart() {
+    this.addCart = {
+      customerId: '9ac26f05-26e3-4fa0-aba8-82c82554c408',
+      productId: this.product.id,
+      productCount: this.Quantity,
+      color: this.colorValue,
+      size: this.size,
+    };
+    this.productService.AddtoCart(this.addCart).subscribe();
+
+    console.log(this.addCart);
   }
 }

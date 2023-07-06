@@ -31,8 +31,9 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ProfileInfoComponent } from './components/ProfileInfo/profile-info/profile-info.component';
-import { DataService } from './components/Data/data.service';
+import { ProfileInfoComponent } from './components/ProfileInfo/profile-info.component';
+import { LoadingInterceptor } from './Interceptor/loading.interceptor';
+import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -69,9 +70,10 @@ import { DataService } from './components/Data/data.service';
     PaginationModule.forRoot(),
     RatingModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: DataService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -10,7 +10,6 @@ import { ErrorComponent } from './components/error/error.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,6 +28,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule, NgxSpinnerModule],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

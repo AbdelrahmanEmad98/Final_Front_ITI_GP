@@ -10,7 +10,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { authenticationGuard } from './guards/authentication.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,11 +25,26 @@ const routes: Routes = [
   { path: 'order/:id', component: CheckOutComponent },
   { path: 'checkout', component: CheckOutComponent },
   { path: 'products/Details/:id', component: ProductDetailsComponent },
+  // =====================================
+
+  {
+    path: 'profile',
+    canActivate: [authenticationGuard],
+    component: ProfileComponent,
+  },
+  // {
+  //   path: 'authentication',
+  //   loadChildren: () =>
+  //     import('./authentication/authentication.module').then(
+  //       (m) => m.AuthenticationModule
+  //     ),
+  // },
+  // =====================================
   { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule, NgxSpinnerModule],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

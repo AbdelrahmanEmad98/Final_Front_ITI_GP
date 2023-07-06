@@ -13,7 +13,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 
@@ -36,6 +35,9 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { AdminPanelComponent } from './components/Admin - Components/admin-panel/admin-panel.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
+import { ProfileInfoComponent } from './components/ProfileInfo/profile-info.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoadingInterceptor } from './Interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,13 +51,14 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
     RegisterComponent,
     ProductsComponent,
     ProductDetailsComponent,
-    ProfileComponent,
     ResetPasswordComponent,
     WishListComponent,
     AboutUsComponent,
     ErrorComponent,
     AdminPanelComponent,
     CheckOutComponent,
+    ProfileComponent,
+    ProfileInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
       useClass: AuthenticationInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

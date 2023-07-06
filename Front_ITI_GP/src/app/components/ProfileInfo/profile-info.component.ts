@@ -1,21 +1,15 @@
 import { Component } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-//import { CustomerAdd } from 'src/app/Models/Customer/CustomerAdd';
-//import { Country } from 'src/app/Models/Enum/Country';
-//import { CustomerService } from 'src/app/services/Customer/customer.service';
-import { __values } from 'tslib';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
 import { OnInit } from '@angular/core';
-import { Countries } from 'src/app/Models/CountriesEnums/Country';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-profile-info',
+  templateUrl: './profile-info.component.html',
+  styleUrls: ['./profile-info.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileInfoComponent implements OnInit {
   selectedCountry = ''; //<<====
   ID: any;
   customer: any;
@@ -47,10 +41,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
-
   validFrm = new FormGroup({
     fname: new FormControl('', [Validators.required, Validators.minLength(3)]),
     mname: new FormControl('', [Validators.nullValidator]),
@@ -76,73 +66,10 @@ export class ProfileComponent implements OnInit {
     ]),
   });
 
-  keyPressNumbers(event: any, len: number) {
-    let inp = String.fromCharCode(event.keyCode);
-    /[0-9]/.test(inp) ? true : event.preventDefault();
-
-    let inp1 = event.target.value;
-    inp1.length < len ? true : event.preventDefault();
+  getCountryName(country: any) {
+    return this.Countries[country];
   }
-
-  keyPressMinLength(event: any, len: number) {
-    let inp = event.target.value;
-    inp.length < len ? true : event.preventDefault();
-  }
-
-  UpdateCustomer(
-    firstName: any,
-    midName: any,
-    lastName: any,
-    phonenumber: any,
-    email: any,
-    city: any,
-    country: any,
-    street: any
-  ) {
-    let customerUpdate = {
-      id: '14a547f2-3abc-4854-aaec-2c775c5ce1cb',
-      firstName,
-      lastName,
-      phonenumber,
-      email,
-      city,
-      midName,
-      password: '12345678',
-      country,
-      street,
-    };
-    console.log(customerUpdate.country);
-
-    this.CustomerService.UpdateCustomerByID(customerUpdate).subscribe({
-      next: () => {
-        console.log('updated');
-        customerUpdate;
-      },
-      error: (err) => {
-        // console.log(customerUpdate.country);
-        err;
-      },
-    });
-  }
-
-  openDialog(mess: string, errFlag: boolean) {
-    this.message = mess;
-    this.FlagError = errFlag;
-    this.displayAlert = 'd-block';
-  }
-
-  closePopup() {
-    this.displayAlert = 'd-none';
-    if (this.FlagError) {
-      this.validFrm.get('email')?.setValue('');
-    } else {
-      Object.keys(this.validFrm.controls).forEach((key) => {
-        this.validFrm.get(key)?.setValue('');
-      });
-    }
-  }
-
-  Countries = [
+  Countries: string[] = [
     'Afghanistan',
     'Albania',
     'Algeria',

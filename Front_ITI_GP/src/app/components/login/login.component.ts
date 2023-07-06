@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,11 @@ export class LoginComponent {
   displayAlert = 'd-none';
   FlagError = false;
 
-  constructor(protected _ser: CustomerService, private router: Router) {}
+  constructor(
+    protected _ser: CustomerService,
+    private router: Router,
+    private location: Location
+  ) {}
 
   loginFrm = new FormGroup({
     email: new FormControl('', [
@@ -57,13 +62,14 @@ export class LoginComponent {
       console.log('I am Invalid');
     } else if (this.loginFrm.valid) {
       this._ser
-        .LoginCustomer({
-          email: this.loginFrm.value.email,
-          password: this.loginFrm.value.password,
+        .login({
+          email: this.loginFrm.value.email!,
+          password: this.loginFrm.value.password!,
         })
         .subscribe({
           next: (response) => {
-            this.router.navigateByUrl('/home');
+            // this.router.navigateByUrl('/home');
+            this.location.back();
           },
           error: () => {
             this.openDialog('Invalid Credentials !', true);

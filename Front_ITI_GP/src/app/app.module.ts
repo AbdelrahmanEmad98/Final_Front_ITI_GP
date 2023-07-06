@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/cart/cart.component';
 import { SubCategoryComponent } from './components/sub-category/sub-category.component';
 import { LoginComponent } from './components/login/login.component';
@@ -35,6 +35,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { AdminPanelComponent } from './components/Admin - Components/admin-panel/admin-panel.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
+import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,13 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
     RatingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

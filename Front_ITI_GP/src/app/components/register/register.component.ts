@@ -108,8 +108,9 @@ export class RegisterComponent {
             } else if (typeof error.error === 'string') {
               errorMessage = error.error;
             }
-            let part = errorMessage.split(',');
-            this.openDialog(part[1], true);
+            //let part = errorMessage.split(',');
+            this.openDialog(errorMessage, true);
+            console.log(errorMessage);
           },
         });
     }

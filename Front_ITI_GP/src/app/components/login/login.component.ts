@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
+import { LoginDto } from 'src/app/Models/LoginDto';
 
 @Component({
   selector: 'app-login',
@@ -56,19 +57,37 @@ export class LoginComponent {
       });
       console.log('I am Invalid');
     } else if (this.loginFrm.valid) {
-      this._ser
-        .LoginCustomer({
-          email: this.loginFrm.value.email,
-          password: this.loginFrm.value.password,
-        })
-        .subscribe({
-          next: (response) => {
-            this.router.navigateByUrl('/home');
-          },
-          error: () => {
-            this.openDialog('Invalid Credentials !', true);
-          },
-        });
+
+
+      var credentials = new LoginDto();
+      credentials.email = this.loginFrm.controls.email.value ?? '';
+      credentials.password = this.loginFrm.controls.password.value ?? '';
+
+      this._ser.login(credentials).subscribe((tokenDto) => {
+        console.log(tokenDto);
+        this.router.navigateByUrl('/');
+      });
+
+
+
+      // var credentials = new LoginDto();
+      // credentials.email = this.loginFrm.controls.email.value!;
+      // credentials.password = this.loginFrm.controls.password.value!;
+      // this._ser
+      //   .LoginCustomer(credentials)
+      //   .subscribe({
+      //     next: (token) => {
+      //       console.log(token);
+      //       this.router.navigateByUrl('/home');
+      //     },
+      //     error: () => {
+      //       this.openDialog('Invalid Credentials !', true);
+      //     },
+      //   });
+
+
+
+
     }
   }
 }

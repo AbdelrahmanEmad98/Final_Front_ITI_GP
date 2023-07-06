@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsService } from 'src/app/services/Product Details/product-details.service';
 import { Location } from '@angular/common';
+import { error } from 'jquery';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -11,7 +12,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private productService: ProductDetailsService,
     private urlData: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private route: Router
   ) {}
   productId = this.urlData.snapshot.params['id'];
 
@@ -26,16 +28,21 @@ export class ProductDetailsComponent implements OnInit {
   size: any;
 
   ngOnInit(): void {
-    this.productService.GetProductDetails(this.productId).subscribe({
-      next: (data: any) => {
+    this.productService.GetProductDetails(this.productId).subscribe(
+      (data)=>
+     {
         this.product = data;
-        this.ColorSizes = data.productInfo[0];
-        this.colorValue = data.productInfo[0].color;
-        this.maxQuantity = data.productInfo[0].sizeQuantities[0].quantity;
+        this.ColorSizes = this.product.productInfo[0];
+        this.colorValue = this.product.productInfo[0].color;
+        this.maxQuantity = this.product.productInfo[0].sizeQuantities[0].quantity;
         this.ImageCount = this.product.productImages.Count;
       },
-      error: () => {},
-    });
+       (error) => {
+        if(error.status== 401)
+        this.route.navigate(["/"]);
+      }
+   
+    )
   }
 
   Sizes(value: any) {
@@ -56,7 +63,8 @@ export class ProductDetailsComponent implements OnInit {
     if (this.Quantity > this.minQuantity) this.Quantity--;
   }
 
-  QuantityCheck(size: any) {
+  QuantityCheck(e:any,size: any) {
+    e.target.style.backgroundColor="gray";
     this.Quantity = 1;
     this.size = size;
     for (let i = 0; i < this.product.productInfo.length; i++) {
@@ -81,13 +89,22 @@ export class ProductDetailsComponent implements OnInit {
 
   AddToCart() {
     this.addCart = {
-      customerId: '9ac26f05-26e3-4fa0-aba8-82c82554c408',
       productId: this.product.id,
       productCount: this.Quantity,
       color: this.colorValue,
       size: this.size,
     };
-    this.productService.AddtoCart(this.addCart).subscribe();
+    this.productService.AddtoCart(this.addCart).subscribe(
+      response => {
+        // Handle successful response
+        console.log(response);
+      },
+      error => {
+        // Handle error response
+        console.log(error);
+        if (error.status === 401) {
+          this.route.navigate(['/login']);
+        }});
 
     console.log(this.addCart);
   }

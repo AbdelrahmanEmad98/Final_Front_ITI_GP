@@ -98,7 +98,7 @@
                                     <ul class="list-inline pb-3 h6">Size :
                                         <li class="list-inline-item" *ngFor="let info of ColorSizes.sizeQuantities">
                                             <button #size class="btn btn-outline-dark" style="width: 45px;"
-                                                value={{info.size}} (click)="QuantityCheck(size.value)">{{info.size}}
+                                                value={{info.size}} (click)="QuantityCheck($event,size.value)">{{info.size}}
                                             </button>
                                         </li>
                                     </ul>

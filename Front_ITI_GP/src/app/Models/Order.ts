@@ -6,5 +6,6 @@ export interface Order{
     paymentStatus:string;
     paymentMethod:string;
     customerId:string;
+    totalPrice:number;
     orderProducts:any[]
 }

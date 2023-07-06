@@ -24,28 +24,29 @@ export class CheckOutComponent implements OnInit {
     paymentStatus: '',
     paymentMethod: '',
     customerId: '',
+    totalPrice:0,
     orderProducts: [{
       productCount: 0,
       productId: ''
     }]
   };
-
+cost:any;
   constructor(private service: CheckOutService, private route: ActivatedRoute, private router: Router) {
     this.ID = route.snapshot.params["id"]
   }
 
   ngOnInit(): void {
-    this.service.GetCartProducts("0e67a2e5-df53-4a92-9854-8e1ad46a4e61").subscribe(
+    this.service.GetCartProducts().subscribe(
       {
         next: (data) => {
-          console.log(data);
           this.cart = data;
-          console.log(this.CalculateTotalCost())
+         console.log(data)
+          this.cost=this.CalculateTotalCost(this.cart);
         },
         error: (error) => { console.log(error) }
       }
     )
-    this.service.GetCustomer("0e67a2e5-df53-4a92-9854-8e1ad46a4e61").subscribe({
+    this.service.GetCustomer().subscribe({
       next: (data) => {
         console.log(data);
         this.customer = data;
@@ -54,13 +55,24 @@ export class CheckOutComponent implements OnInit {
     })
   }
 
-  CalculateTotalCost() {
-    let totalcost = 0;
-    for (let i = 0; i < this.cart.products.length; i++) {
-      totalcost += this.cart.products[i].price;
-    }
-    this.cart.totalCost = totalcost;
-    return this.cart.totalCost;
+  CalculateTotalCost(cart:any) {
+    let discount = 0;
+    console.log(cart)
+    let total=0;
+    cart.products.forEach((p: { price: number; discount: number; quantity: number; }) => {
+      
+      total += p.price*(1-p.discount)*p.quantity;
+      
+    });
+
+   
+    discount = cart.totalCost - total;
+    //this.cart.totalCost = totalcost;
+    
+    return  {
+      discount:discount,
+      total:total
+    };
 
   }
 
@@ -86,6 +98,7 @@ export class CheckOutComponent implements OnInit {
         paymentStatus: 'Unpaid',
         paymentMethod: 'CashOnDelivery',
         customerId: this.customer.id,
+        totalPrice:this.cost.total,
         orderProducts: []
       }
       if (this.myForm.value.city != undefined &&
@@ -104,6 +117,7 @@ export class CheckOutComponent implements OnInit {
         this.order.orderProducts.push({ productId: this.cart.products[i].productId, productCount: i })
       }
       console.log(this.order);
+      ///////////1-Added Order //////////
       this.service.PlaceOrder(this.order).subscribe({
         next:(data)=>{
           console.log("Added");

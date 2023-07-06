@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 mx-auto" style="width: 400px">
+      <h1>LogIn</h1>
+      <div class="card mb-2">
+        <div class="card-body">
+          <form class="row g-3 needs-validation" [formGroup]="loginFrm" (ngSubmit)="login()">
+            <div class="col-md-12">
+              <label for="email" class="form-label">Email</label>
+
+              <input #email formControlName="email" (keypress)="keyPressMinLength($event, 35)" type="email"
+                class="form-control" id="email" placeholder="Email" required />
+
+              <div class="form-control-feedback" *ngIf="
+                  loginFrm.get('email')?.errors &&
+                  (loginFrm.get('email')?.dirty ||
+                    loginFrm.get('email')?.touched)
+                ">
+                <p *ngIf="loginFrm?.get('email')?.errors?.['required']" class="text-danger">
+                  Email is required
+                </p>
+                <p *ngIf="loginFrm?.get('email')?.errors?.['pattern']" class="text-danger">
+                  Invalid Email
+                </p>
+              </div>
+            </div>
+
+            <!-- =================================================== -->
+            <div class="col-md-12">
+              <label for="password" class="form-label">Password</label>
+              <div class="input-group">
+                <input #password formControlName="password" (keypress)="keyPressMinLength($event, 25)"
+                  type="{{ showPassword ? 'text' : 'password' }}" class="form-control" id="password"
+                  placeholder="Password" required />
+
+                <span class="input-group-text" (click)="togglePassword()">
+                  <i [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'" id="togglePassword"></i>
+                </span>
+              </div>
+              <div class="form-control-feedback" *ngIf="
+                  loginFrm.get('password')?.errors &&
+                  (loginFrm.get('password')?.dirty ||
+                    loginFrm.get('password')?.touched)
+                ">
+                <p *ngIf="loginFrm?.get('password')?.errors?.['required']" class="text-danger">
+                  password is required
+                </p>
+              </div>
+            </div>
+
+            <!-- =================================================== -->
+
+            <div class="col-12 text-end">
+              <button class="btn btn-primary" type="submit">Log In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- =================================================== -->
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="displayAlert">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ FlagError ? "Alert" : "Done" }}</h4>
+      </div>
+      <div class="modal-body">
+        {{ message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

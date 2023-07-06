@@ -21,7 +21,7 @@
 
             <div class="col-md-4">
               <label for="mname" class="form-label">Middle name</label>
-              <input [(ngModel)]="mname" [ngModelOptions]="{standalone: true}" (keypress)="keyPressMinLength($event,15)" type="text" class="form-control"
+              <input [(ngModel)]="mname" (keypress)="keyPressMinLength($event,15)" type="text" class="form-control"
                 id="mname" placeholder="Middle Name">
             </div>
 

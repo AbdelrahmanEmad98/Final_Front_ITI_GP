@@ -12,7 +12,8 @@ export class CustomerService {
   // ==============================================================
   constructor(private http: HttpClient) {}
   private readonly API_URL = 'https://localhost:7052/api/';
-  GetCustomerInfoById(CustomerId: any) {
+  GetCustomerInfoById(CustomerId = '14a547f2-3abc-4854-aaec-2c775c5ce1cb') {
+    // return this.http.get(`https://localhost:7052/api/Customer/${CustomerId}`);
     return this.http.get(`https://localhost:7052/api/Customer/${CustomerId}`);
   }
   AddCustomer(data: any) {
@@ -38,5 +39,13 @@ export class CustomerService {
 
   public getTestData(): Observable<string[]> {
     return this.http.get<string[]>(this.API_URL + 'Test/test');
+  }
+
+  UpdateCustomerByID(customerUpdate: any) {
+    console.log(customerUpdate);
+    return this.http.patch(
+      `https://localhost:7052/api/Customer/14a547f2-3abc-4854-aaec-2c775c5ce1cb`,
+      customerUpdate
+    );
   }
 }

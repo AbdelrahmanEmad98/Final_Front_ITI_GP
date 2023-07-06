@@ -33,9 +33,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
-import { AdminPanelComponent } from './components/Admin - Components/admin-panel/admin-panel.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
+import { ProfileInfoComponent } from './components/ProfileInfo/profile-info.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './Interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,8 +56,9 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
     WishListComponent,
     AboutUsComponent,
     ErrorComponent,
-    AdminPanelComponent,
     CheckOutComponent,
+    ProfileComponent,
+    ProfileInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
     PaginationModule.forRoot(),
     RatingModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   providers: [
     {
@@ -79,6 +83,7 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
       useClass: AuthenticationInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

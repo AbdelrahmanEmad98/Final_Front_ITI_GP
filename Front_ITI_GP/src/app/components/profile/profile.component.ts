@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit {
   }
 
   UpdateCustomer(
-    firstName: any,
+    firstName: any = '',
     midName: any,
     lastName: any,
     phonenumber: any,

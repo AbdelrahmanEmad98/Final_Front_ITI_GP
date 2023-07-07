@@ -1,5 +1,5 @@
 export class TokenDto {
   token: string = '';
-  // expiry: Date = new Date();
+  exp: string = '';
   // result: number = 0;
 }

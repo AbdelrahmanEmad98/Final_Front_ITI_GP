@@ -13,6 +13,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { authenticationGuard } from './guards/authentication.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ProfileInfoComponent } from './components/ProfileInfo/profile-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [authenticationGuard],
     component: ProfileComponent,
+  },
+  {
+    path: 'profileInfo',
+    canActivate: [authenticationGuard],
+    component: ProfileInfoComponent,
   },
   // {
   //   path: 'authentication',

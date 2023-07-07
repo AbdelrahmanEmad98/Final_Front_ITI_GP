@@ -30,7 +30,7 @@ export class ProfileInfoComponent implements OnInit {
     console.log(this.ID);
   }
   ngOnInit(): void {
-    this.CustomerService.GetCustomerInfoById(this.ID).subscribe({
+    this.CustomerService.GetCustomer().subscribe({
       next: (data) => {
         console.log(data);
         this.customer = data;

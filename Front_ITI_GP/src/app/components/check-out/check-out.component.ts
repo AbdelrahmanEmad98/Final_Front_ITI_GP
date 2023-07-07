@@ -84,7 +84,6 @@ cost:any;
 
   onSubmit() {
     if (!this.myForm.valid && this.anotherAddress) {
-      // Handle form submission
       this.myForm.markAllAsTouched();
 
     } else {

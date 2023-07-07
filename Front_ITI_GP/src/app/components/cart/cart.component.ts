@@ -23,48 +23,45 @@ export class CartComponent implements OnInit {
   totalPriceBefore: any;
   totalPriceAfter: any;
   cart: any;
-  checkOutBtn:any;
+  checkOutBtn: any;
   constructor(private myService: CartService, public route: Router) {}
 
   ngOnInit() {
+    this.myService.getCartProductsByCustomerId().subscribe(
+      (response) => {
+        this.cart = response;
+        this.cartItems = response.products.map((item: any) => ({
+          image: item.image || '',
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          totalPriceBefor: item.price * item.quantity,
+          totalPriceAfter: item.price * item.quantity * item.discount,
+          quantityInStock: item.quantityInStock,
+          color: item.color,
+          size: item.size,
+          productId: item.productId,
+          cartId: response.cartId,
+          discount: item.discount,
+        }));
 
-    this.myService.getCartProductsByCustomerId().subscribe((response) => 
-    {
-          this.cart = response;
-          this.cartItems = response.products.map((item: any) => ({
-            image: item.image || '',
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity,
-            totalPriceBefor: item.price * item.quantity,
-            totalPriceAfter: item.price * item.quantity * item.discount,
-            quantityInStock: item.quantityInStock,
-            color: item.color,
-            size: item.size,
-            productId: item.productId,
-            cartId: response.cartId,
-            discount: item.discount,
-          }));
-          
-          this.calculateTotalPrice();
-          if(this.cartItems.length){
-            this.checkOutBtn=this.cartItems.length;
-          }
-            else
-            this.checkOutBtn=0;
-
-        },
-        (error) => {
-          if(error.status== 400)
-          this.route.navigate(["/login"]);
-        }
-      );
+        this.calculateTotalPrice();
+        if (this.cartItems.length) {
+          this.checkOutBtn = this.cartItems.length;
+        } else this.checkOutBtn = 0;
+      },
+      (error) => {
+        if (error.status == 400) this.route.navigate(['/login']);
+      }
+    );
   }
 
   calculateTotalPrice() {
     if (this.cartItems.length != 0) {
       this.totalPriceBefore = this.cartItems.reduce(
-        (total, item) => total + item.price * item.quantity,0);
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
       this.cartItems.forEach((c) => {
         if (c.discount == 0) {
           this.totalPriceAfter = c.price * c.quantity;
@@ -80,36 +77,31 @@ export class CartComponent implements OnInit {
   }
 
   decreaseQuantity(item: any) {
-    let product={
+    let product = {
       productId: item.productId,
       productCount: item.quantity,
       color: item.color,
-      size: item.size
-    }
+      size: item.size,
+    };
     console.log(product);
-    this.myService.UpdateProductCountDecr(product).subscribe(
-      data=>{
-        console.log(data);
-        console.log("data");
-        this.ngOnInit();
-      }
-    )
-    
+    this.myService.UpdateProductCountDecr(product).subscribe((data) => {
+      console.log(data);
+      console.log('data');
+      this.ngOnInit();
+    });
   }
 
   increaseQuantity(item: any) {
-    let product={
+    let product = {
       productId: item.productId,
       productCount: item.quantity,
       color: item.color,
-      size: item.size
-    }
+      size: item.size,
+    };
     console.log(product);
-    this.myService.UpdateProductCountPlus(product).subscribe(
-      data=>{
+    this.myService.UpdateProductCountPlus(product).subscribe((data) => {
       this.ngOnInit();
-      }
-    )
+    });
   }
 
   deleteItem: any;
@@ -150,6 +142,4 @@ export class CartComponent implements OnInit {
       }
     );
   }
-
-  
 }

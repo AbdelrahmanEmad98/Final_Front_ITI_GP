@@ -75,10 +75,10 @@
   <br>
   <br>
   <div class="d-flex justify-content-between mt-4">
-    <button *ngIf="checkOutBtn>0; else elseBlock"  routerLink="/order" mat-raised-button
+    <button *ngIf="checkOutBtn>0; else elseBlock" routerLink="/order" mat-raised-button
       style="background-color: rgb(0, 91, 91); color: white;">CHECK OUT</button>
-      <ng-template  #elseBlock  mat-raised-button>CHECK OUT</ng-template>
-    <button  mat-raised-button style="background-color: rgb(0, 91, 91);  color: white;;"
+    <ng-template #elseBlock mat-raised-button>CHECK OUT</ng-template>
+    <button mat-raised-button style="background-color: rgb(0, 91, 91);  color: white;;"
       (click)="deleteCart()">Delete</button>
   </div>
   <br><br>

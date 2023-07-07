@@ -8,8 +8,8 @@ import { CustomerService } from './services/Customer/customer.service';
 })
 export class AppComponent implements OnInit {
   constructor(private authenticationService: CustomerService) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('expiration');
   }
 
   ngOnInit(): void {

@@ -5,7 +5,8 @@ export interface Order{
     country:string;
     paymentStatus:string;
     paymentMethod:string;
-    customerId:string;
     totalPrice:number;
-    orderProducts:any[]
+    orderProducts:any;
 }
+
+

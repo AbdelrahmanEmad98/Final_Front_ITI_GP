@@ -23,7 +23,6 @@ export class CheckOutComponent implements OnInit {
     country: '',
     paymentStatus: '',
     paymentMethod: '',
-    customerId: '',
     totalPrice:0,
     orderProducts: [{
       productCount: 0,
@@ -89,7 +88,7 @@ cost:any;
       this.myForm.markAllAsTouched();
 
     } else {
-
+     
       console.log(this.myForm.value);
       this.order = {
         city: this.customer.city,
@@ -97,7 +96,6 @@ cost:any;
         country: this.customer.country,
         paymentStatus: 'Unpaid',
         paymentMethod: 'CashOnDelivery',
-        customerId: this.customer.id,
         totalPrice:this.cost.total,
         orderProducts: []
       }
@@ -114,17 +112,20 @@ cost:any;
       }
 
       for (let i = 0; i < this.cart.products.length; i++) {
-        this.order.orderProducts.push({ productId: this.cart.products[i].productId, productCount: i })
+        this.order.orderProducts.push({ productId: this.cart.products[i].productId ,
+          color: this.cart.products[i].color,
+           productCount: this.cart.products[i].quantity,
+           size: this.cart.products[i].size,
+           price: this.cart.products[i].price,
+           })
       }
+      
       console.log(this.order);
-      ///////////1-Added Order //////////
+      ///////////1- Check Quantity Valid & Added Order & Decrease Quantity && 4- Delete Cart  //////////
       this.service.PlaceOrder(this.order).subscribe({
         next:(data)=>{
-          console.log("Added");
-          this.service.ClearCartProducts(this.customer.id).subscribe({
-            next:(data)=>{console.log("cleared")},
-            error:(data)=>{console.log("Not Cleared")}
-          })
+          this.router.navigate(["/"])
+          
         },
         error:(error1)=> {console.log("notAdded")}
       })

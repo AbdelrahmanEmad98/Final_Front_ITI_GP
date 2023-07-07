@@ -13,6 +13,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { authenticationGuard } from './guards/authentication.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { WishListComponent } from './components/wish-list/wish-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,6 +27,9 @@ const routes: Routes = [
   { path: 'order/:id', component: CheckOutComponent },
   { path: 'checkout', component: CheckOutComponent },
   { path: 'products/Details/:id', component: ProductDetailsComponent },
+  { path: 'wish', component: WishListComponent },
+
+
   // =====================================
 
   {

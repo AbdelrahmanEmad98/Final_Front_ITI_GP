@@ -1,69 +1,162 @@
-<section id="collection" class="py-5">
-  <!-- <div class="col-md-3 mb-3 ms-auto">
-    <div class="input-group position-relative">
-      <input class="form-control py-2 rounded-pill mr-1 pr-5" type="search" placeholder="Search Products..."
-        id="example-search-input" [(ngModel)]="searchKey" />
-      <span class="input-group-append" style="margin-left: 0">
-        <button class="btn rounded-pill border-0 ml-n5 position-absolute" type="button"
-          style="right: 1px; top: 3px; background-color: #eee">
-          <i class="bi bi-search"></i>
-        </button>
-      </span>
-    </div>
-  </div> -->
-  <div class="container" id="tab">
+<!-- <section id="collection" class="py-5">
+  <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-3">
-        <button class="btn m-3" (click)="GetAll()">All Products</button>
+      <div class="col-md-3">
+        <button class="btn m-3 custom-button" (click)="GetAll()">All Products</button>
       </div>
-      <div class="col-6">
+      <div class="col-md-8">
         <ul class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs">
           <li class="nav-item" *ngFor="let category of subCategories">
-            <button #sub class="btn m-3" value="{{category.id}}" (click)="getProductsbyCategory(sub.value)">{{
-              category.name }}</button>
+            <button class="btn m-3 custom-button" value="{{category.id}}" (click)="getProductsbyCategory(category.id)">
+              {{ category.name }}
+            </button>
           </li>
         </ul>
       </div>
     </div>
-    <!-- <div class="row tab-content">
-      <h1 class="col-3">filter</h1>
-      <div class="col-9 text-center">
-        <div class="mt-4" *ngIf="items">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-3 mt-3" *ngFor="
-                let product of items
-                  | paginate
-                    : {
-                        id: 'list_pagination',
-                        itemsPerPage: counterPerPage,
-                        currentPage: page,
-                        totalItems: totalCount
-                      }
-              "> -->
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="card col-3 p-0 me-1" *ngFor="let product of productsofSub">
-          <div class="bg-image hover-overlay ripple col-12" data-mdb-ripple-color="light">
-            <img src="{{product.productImages[0].imageURL}}" class="img-fluid" />
-          </div>
-          <div class="card-body">
-            <h2 class="card-title">{{product.name}}</h2>
-            <div class="row">
-              <p class="h5 -2 col-6">{{product.price*(1-product.discount) | number:'1.0-2'}} EGP</p>
-              <div *ngIf="product.discount>0" class="col-6">
-                <p class="h5 py-2 text-decoration-line-through text-danger m-0">
-                  {{product.price | number:'1.0-2'}} EGP</p>
+
+ 
+
+      <div id="page-content-wrapper">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-3 col-sm-6" *ngFor="let product of productsofSub">
+              <div class="card product-card" style="width: 280px;">
+                <a routerLink="/products/Details/{{ product.id }}">
+                  <img [src]="product.productImages[0].imageURL" class="card-img-top" alt="Product Image" style="object-fit: cover; width: 280px; height: 330px;">
+                </a>
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <div>
+                    <ul class="list-unstyled d-flex justify-content-between mb-2">
+                      <li>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-warning fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                      </li>
+                      <li class="text-muted" style="font-size: 18px;">{{ product.price * (1 - product.discount) | number:'1.0-2' }} EGP</li>
+                    </ul>
+                    <a class="h6 text-decoration-none text-dark" style="height: 60px; overflow: hidden;">{{ product.name }}</a>
+                  </div>
+                  <div>
+                    <p class="card-text small text-muted" style="height: 80px; overflow: hidden;">{{ product.description }}</p>
+                    <p class="card-text text-muted">Reviews (20)</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <a routerLink="/products/Details/{{ product.id }}" class="btn btn-primary">Details</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- <div class="text-center">
-    <pagination-controls id="list_pagination" (pageChange)="getProducts($event)" previousLabel="&lsaquo;"
-      nextLabel="&rsaquo;" class="my-pagination"></pagination-controls>
-  </div>  -->
+</section> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="sidebar col-3">
+      <label for="dropdown-1" class="dropdown-btn">Category</label>
+      <input type="checkbox" id="dropdown-1" class="dropdown-checkbox">
+      <div class="dropdown-container">
+        <a href="#">Man</a>
+        <a href="#">Women</a>
+        <a href="#">Kids</a>
+      </div>
+
+      <label for="dropdown-2" class="dropdown-btn">Product Type</label>
+      <input type="checkbox" id="dropdown-2" class="dropdown-checkbox">
+      <div class="dropdown-container">
+        <a href="#">T-shirt</a>
+        <a href="#">Pants</a>
+      </div>
+
+      <label for="dropdown-3" class="dropdown-btn">Color</label>
+      <input type="checkbox" id="dropdown-3" class="dropdown-checkbox">
+      <div class="dropdown-container">
+        <a href="#">Red</a>
+        <a href="#">Blue</a>
+        <a href="#">Green</a>
+      </div>
+      <label for="dropdown-3" class="dropdown-btn">Size</label>
+      <input type="checkbox" id="dropdown-3" class="dropdown-checkbox">
+      <div class="dropdown-container">
+        <a href="#">S</a>
+        <a href="#">M</a>
+        <a href="#">L</a>
+      </div>
+      <button
+        style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
+        onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
+        onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
+        Filter
+      </button><br><br>
+      <button 
+      style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
+      onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
+      onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
+        Clear
+      </button>
+    </div>
+
+    <div class="col-8">
+      <section id="collection" class="py-5">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-md-3">
+              <button class="btn m-3 custom-button" (click)="GetAll()">All Products</button>
+            </div>
+            <div class="col-md-8">
+              <ul class="nav nav-tabs d-flex justify-content-center border-0 collection-tabs">
+                <li class="nav-item" *ngFor="let category of subCategories">
+                  <button class="btn m-3 custom-button" value="{{category.id}}"
+                    (click)="getProductsbyCategory(category.id)">
+                    {{ category.name }}
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div>
+        <div id="page-content-wrapper">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-3 col-sm-6" *ngFor="let product of productsofSub">
+                <div class="card product-card" style="width: 280px;">
+                  <a routerLink="/products/Details/{{ product.id }}">
+                    <img [src]="product.productImages[0].imageURL" class="card-img-top" alt="Product Image"
+                      style="object-fit: cover; width: 280px; height: 330px;">
+                  </a>
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                      <ul class="list-unstyled d-flex justify-content-between mb-2">
+                        <li>
+                          <i class="text-warning fa fa-star"></i>
+                          <i class="text-warning fa fa-star"></i>
+                          <i class="text-warning fa fa-star"></i>
+                          <i class="text-muted fa fa-star"></i>
+                          <i class="text-muted fa fa-star"></i>
+                        </li>
+                        <li class="text-muted" style="font-size: 18px;">{{ product.price * (1 - product.discount) |
+                          number:'1.0-2' }} EGP</li>
+                      </ul>
+                      <a class="h6 text-decoration-none text-dark" style="height: 60px; overflow: hidden;">{{
+                        product.name }}</a>
+                    </div>
+                    <div>
+                      <p class="card-text small text-muted" style="height: 80px; overflow: hidden;">{{
+                        product.description }}</p>
+                      <p class="card-text text-muted">Reviews (20)</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</section>

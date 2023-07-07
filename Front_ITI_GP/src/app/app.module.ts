@@ -38,6 +38,8 @@ import { AuthenticationInterceptor } from './interceptors/authentication.interce
 import { ProfileInfoComponent } from './components/ProfileInfo/profile-info.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoadingInterceptor } from './Interceptor/loading.interceptor';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { LoadingInterceptor } from './Interceptor/loading.interceptor';
     CheckOutComponent,
     ProfileComponent,
     ProfileInfoComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,7 @@ import { LoadingInterceptor } from './Interceptor/loading.interceptor';
     NgxPaginationModule,
     PaginationModule.forRoot(),
     RatingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

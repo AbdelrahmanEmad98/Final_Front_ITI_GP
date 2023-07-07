@@ -37,6 +37,9 @@ export class ProductsComponent implements OnInit {
   CategoryId = this.route.snapshot.params['id'];
   subCategories: any;
   productsofSub: any;
+  subCategoryId: any;
+  Color: any;
+  Size: any;
 
   ngOnInit(): void {
     this.myService.getSubcategories(this.CategoryId).subscribe({
@@ -68,12 +71,61 @@ export class ProductsComponent implements OnInit {
     this.myService.getProductsByParentCategoryId(this.CategoryId).subscribe({
       next: (res) => {
         this.productsofSub = res;
+        console.log(this.productsofSub);
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
+
+  subId(subId: any) {
+    this.subCategoryId = subId;
+    console.log(this.subCategoryId);
+  }
+
+  color(col: any) {
+    this.Color = col;
+  }
+
+  size(si: any) {
+    this.Size = si;
+  }
+
+  Filter() {
+    this.myService
+      .getProductsFiltered(
+        this.CategoryId,
+        this.subCategoryId,
+        this.Color,
+        this.Size
+      )
+      .subscribe({
+        next: (res) => {
+          this.productsofSub = res;
+          console.log(this.productsofSub);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  Colors: string[] = [
+    'Red',
+    'Blue',
+    'Green',
+    'Yellow',
+    'Orange',
+    'Purple',
+    'Pink',
+    'Black',
+    'White',
+    'Gray',
+    ' Brown',
+  ];
+
+  Sizes: string[] = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   // getProducts(page: number) {
   //   this.isLoading = true;

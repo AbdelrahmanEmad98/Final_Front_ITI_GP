@@ -50,4 +50,10 @@ export class ProductsService {
   getProductsUnique(id: any) {
     return this.http.get(`https://localhost:7052/api/Products/UniqueProducts`);
   }
+
+  getProductsFiltered(parId: any, subId: any, color: any, size: any) {
+    return this.http.get(
+      `https://localhost:7052/api/Filter?ParentId=${parId}+&ChildId=${subId}&Color=${color}&Size=${size}`
+    );
+  }
 }

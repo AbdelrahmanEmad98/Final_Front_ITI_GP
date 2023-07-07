@@ -10,8 +10,8 @@ export class CartService {
   constructor(private readonly myClient: HttpClient) { }
   private readonly API_URL = "https://localhost:7052/api/";
 
-  getCartProductsByCustomerId(customerId: string) {
-    return this.myClient.get<any>(`${this.API_URL}cart/${customerId}`);
+  getCartProductsByCustomerId() {
+    return this.myClient.get<any>(`${this.API_URL}cart/CartProducts`);
   }
 
   deleteCartProduct(item:any) {
@@ -21,9 +21,9 @@ export class CartService {
     return this.myClient.delete(this.API_URL+"Cart/DeletePrdouctFromCart",options);
   }
 
-  deleteCart(cartId: any) {
-    console.log("dsad"+cartId);
-    return this.myClient.delete(`${this.API_URL}Cart/${cartId}`);
+  deleteCart() {
+    
+    return this.myClient.delete(`${this.API_URL}Cart`);
   }
 
   updateCartProduct(productId: string, cartId: string, quantity: number) {
@@ -37,5 +37,13 @@ export class CartService {
 
   getProductDetails(productId: string) {
     return this.myClient.get<any>(`${this.API_URL}product/Details/${productId}`);
+  }
+
+  UpdateProductCountPlus(product: any) {
+    return this.myClient.patch(`${this.API_URL}Cart/Increase`,product);
+  }
+
+  UpdateProductCountDecr(product: any) {
+    return this.myClient.patch(`${this.API_URL}Cart/Decrease`,product);
   }
 }

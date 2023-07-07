@@ -7,7 +7,10 @@ import { CustomerService } from './services/Customer/customer.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private authenticationService: CustomerService) {}
+  constructor(private authenticationService: CustomerService) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {

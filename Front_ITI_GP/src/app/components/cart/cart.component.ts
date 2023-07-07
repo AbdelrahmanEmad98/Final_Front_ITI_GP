@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-cart',
@@ -22,17 +23,14 @@ export class CartComponent implements OnInit {
   totalPriceBefore: any;
   totalPriceAfter: any;
   cart: any;
-
+  checkOutBtn:any;
   constructor(private myService: CartService, public route: Router) {}
 
   ngOnInit() {
-    this.myService
-      .getCartProductsByCustomerId('9ac26f05-26e3-4fa0-aba8-82c82554c408')
-      .subscribe(
-        (response) => {
-          this.cart = response;
 
-          console.log(response);
+    this.myService.getCartProductsByCustomerId().subscribe((response) => 
+    {
+          this.cart = response;
           this.cartItems = response.products.map((item: any) => ({
             image: item.image || '',
             name: item.name,
@@ -47,25 +45,26 @@ export class CartComponent implements OnInit {
             cartId: response.cartId,
             discount: item.discount,
           }));
-          console.log(this.cartItems);
+          
           this.calculateTotalPrice();
+          if(this.cartItems.length){
+            this.checkOutBtn=this.cartItems.length;
+          }
+            else
+            this.checkOutBtn=0;
+
         },
         (error) => {
-          console.error('Failed to get cart products', error);
+          if(error.status== 400)
+          this.route.navigate(["/login"]);
         }
       );
   }
 
   calculateTotalPrice() {
-    console.log('try');
-    console.log(this.cartItems != null);
-    console.log(this.cartItems.length == 0);
-    console.log(this.cartItems);
     if (this.cartItems.length != 0) {
       this.totalPriceBefore = this.cartItems.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
+        (total, item) => total + item.price * item.quantity,0);
       this.cartItems.forEach((c) => {
         if (c.discount == 0) {
           this.totalPriceAfter = c.price * c.quantity;
@@ -81,20 +80,36 @@ export class CartComponent implements OnInit {
   }
 
   decreaseQuantity(item: any) {
-    if (item.quantity > 1) {
-      item.quantity--;
-      //this.updateTotalPrice(item);
-      this.calculateTotalPrice();
+    let product={
+      productId: item.productId,
+      productCount: item.quantity,
+      color: item.color,
+      size: item.size
     }
+    console.log(product);
+    this.myService.UpdateProductCountDecr(product).subscribe(
+      data=>{
+        console.log(data);
+        console.log("data");
+        this.ngOnInit();
+      }
+    )
+    
   }
 
   increaseQuantity(item: any) {
-    const maxQuantity = Math.min(item.quantityInStock, item.quantity + 1);
-    if (item.quantity < maxQuantity) {
-      item.quantity++;
-      //this.updateTotalPrice(item);
-      this.calculateTotalPrice();
+    let product={
+      productId: item.productId,
+      productCount: item.quantity,
+      color: item.color,
+      size: item.size
     }
+    console.log(product);
+    this.myService.UpdateProductCountPlus(product).subscribe(
+      data=>{
+      this.ngOnInit();
+      }
+    )
   }
 
   deleteItem: any;
@@ -123,7 +138,7 @@ export class CartComponent implements OnInit {
 
   deleteCart() {
     console.log(this.cart.cartId);
-    this.myService.deleteCart(this.cart.cartId).subscribe(
+    this.myService.deleteCart().subscribe(
       () => {
         console.log('Cart deleted');
         this.cartItems = [];
@@ -136,7 +151,5 @@ export class CartComponent implements OnInit {
     );
   }
 
-  checkout() {
-    let cartId = this.cart.customerId;
-  }
+  
 }

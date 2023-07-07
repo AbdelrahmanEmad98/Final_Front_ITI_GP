@@ -8,10 +8,16 @@
             <ul *ngIf="cart" class="list-group my-md-5 my-4">
                 <li *ngFor="let product of cart.products" class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">{{product.name}}</h6>
+                        <h3 class="my-0">{{product.name}}</h3>
                         <small class="text-body-secondary">{{product.description}}</small>
+                        <br>
+                        <small class="text-body-secondary">Color: {{product.color}}</small>
+                        <br>
+                        <small class="text-body-secondary">Size: {{product.size}}</small>
+                        <br>
+                        <small class="text-body-secondary">Quantity: {{product.quantity}}</small>
                     </div>
-                    <span class="text-body-secondary">${{product.price}}</span>
+                    <span class="text-body-secondary">${{product.price}} x {{product.quantity}}</span>
                 </li>
 
                 <!-- <li class="list-group-item d-none d-flex justify-content-between bg-body-tertiary">
@@ -21,10 +27,18 @@
                     </div>
                     <span class="text-success">−$5</span>
                 </li> -->
-
+                
                 <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>${{cart.totalCost}}</strong>
+                    <span>Total (EGP)</span>
+                    <p class="m-0">L.E {{cart.totalCost}}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Discount (EGP)</span>
+                    <del class="text-danger">L.E {{cost.discount.toFixed(2)}}</del>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (EGP)</span>
+                    <strong>L.E {{cost.total.toFixed(2)}}</strong>
                 </li>
             </ul>
 

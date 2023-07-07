@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
     console.log(this.ID);
   }
   ngOnInit(): void {
-    this.CustomerService.GetCustomerInfoById(this.ID).subscribe({
+    this.CustomerService.GetCustomer().subscribe({
       next: (data) => {
         console.log(data);
         this.customer = data;
@@ -97,17 +97,17 @@ export class ProfileComponent implements OnInit {
     email: any,
     city: any,
     country: any,
-    street: any
+    street: any,
+    password: any
   ) {
     let customerUpdate = {
-      id: '14a547f2-3abc-4854-aaec-2c775c5ce1cb',
       firstName,
       lastName,
       phonenumber,
       email,
       city,
       midName,
-      password: '12345678',
+      password,
       country,
       street,
     };
@@ -117,10 +117,12 @@ export class ProfileComponent implements OnInit {
       next: () => {
         console.log('updated');
         customerUpdate;
+        this.routr.navigateByUrl('/profileInfo');
       },
       error: (err) => {
         // console.log(customerUpdate.country);
-        err;
+        this.openDialog('Invalid Credentials !', true);
+        // err;
       },
     });
   }

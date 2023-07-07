@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginDto } from 'src/app/Models/LoginDto';
 import { TokenDto } from 'src/app/Models/TokenDto';
@@ -10,11 +11,11 @@ import { TokenDto } from 'src/app/Models/TokenDto';
 export class CustomerService {
   public isLoggedIn$ = new BehaviorSubject<boolean>(false);
   // ==============================================================
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   private readonly API_URL = 'https://localhost:7052/api/';
-  GetCustomerInfoById(CustomerId = '14a547f2-3abc-4854-aaec-2c775c5ce1cb') {
-    // return this.http.get(`https://localhost:7052/api/Customer/${CustomerId}`);
-    return this.http.get(`https://localhost:7052/api/Customer/${CustomerId}`);
+
+  GetCustomer() {
+    return this.http.get(`${this.API_URL}Customer/GetByOne`);
   }
   AddCustomer(data: any) {
     return this.http.post(this.API_URL + 'Security/Register', data);
@@ -33,6 +34,16 @@ export class CustomerService {
         tap((tokenDto) => {
           this.isLoggedIn$.next(true);
           localStorage.setItem('token', tokenDto.token);
+          localStorage.setItem('expiration', tokenDto.exp);
+
+          setInterval(() => {
+            const token = localStorage.getItem('token');
+            const expiration = localStorage.getItem('expiration');
+            if (token && expiration && Date.now() > Date.parse(expiration)) {
+              localStorage.removeItem('token');
+              localStorage.removeItem('expiration');
+            }
+          }, 60000); // check every minute
         })
       );
   }
@@ -42,9 +53,12 @@ export class CustomerService {
 
   UpdateCustomerByID(customerUpdate: any) {
     console.log(customerUpdate);
-    return this.http.patch(
-      `https://localhost:7052/api/Customer/14a547f2-3abc-4854-aaec-2c775c5ce1cb`,
-      customerUpdate
-    );
+    return this.http.patch(this.API_URL + `Customer`, customerUpdate);
+  }
+
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+    this.router.navigate(['/home']);
   }
 }

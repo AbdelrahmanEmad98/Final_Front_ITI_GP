@@ -25,7 +25,7 @@
                             <div class="carousel-item active">
                                 <div class="row">
                                     <div class="col-4" *ngFor="let image of product.productImages.slice(0, 3)">
-                                        <a href="#">
+                                        <a>
                                             <img class="card-img img-fluid" src={{image.imageURL}}
                                                 alt="Product Image 1">
                                         </a>
@@ -38,7 +38,7 @@
                             <div class="carousel-item">
                                 <div class="row">
                                     <div class="col-4" *ngFor="let image of product.productImages.slice(3,ImageCount)">
-                                        <a href="#">
+                                        <a>
                                             <img class="card-img img-fluid" src={{image.imageURL}}
                                                 alt="Product Image 4">
                                         </a>
@@ -98,7 +98,7 @@
                                     <ul class="list-inline pb-3 h6">Size :
                                         <li class="list-inline-item" *ngFor="let info of ColorSizes.sizeQuantities">
                                             <button #size class="btn btn-outline-dark" style="width: 45px;"
-                                                value={{info.size}} (click)="QuantityCheck(size.value)">{{info.size}}
+                                                value={{info.size}} (click)="QuantityCheck($event,size.value)">{{info.size}}
                                             </button>
                                         </li>
                                     </ul>

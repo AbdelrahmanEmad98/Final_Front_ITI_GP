@@ -21,9 +21,6 @@ export class ProductDetailsService {
   // }
 
   AddtoCart(product: any) {
-    return this.productData.post(
-      'https://localhost:7052/api/Cart/9ac26f05-26e3-4fa0-aba8-82c82554c408',
-      product
-    );
+    return this.productData.post("https://localhost:7052/api/Cart/AddCart",product);
   }
 }

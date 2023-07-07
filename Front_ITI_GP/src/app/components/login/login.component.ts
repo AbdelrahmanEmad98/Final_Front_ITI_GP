@@ -15,7 +15,7 @@ export class LoginComponent {
   message: any;
   displayAlert = 'd-none';
   FlagError = false;
-
+  mess = false;
   constructor(
     protected _ser: CustomerService,
     private router: Router,
@@ -72,7 +72,7 @@ export class LoginComponent {
             this.location.back();
           },
           error: () => {
-            this.openDialog('Invalid Credentials !', true);
+            this.mess = true;
           },
         });
     }

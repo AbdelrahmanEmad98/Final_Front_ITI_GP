@@ -11,11 +11,11 @@ export class CheckOutService {
 
    }
 
-   GetCartProducts(customerId:any){
-    return this.myclient.get(`${this.BaseUrl}Cart/${customerId}`)
+   GetCartProducts(){
+    return this.myclient.get(`${this.BaseUrl}Cart/CartProducts`)
    }
-   GetCustomer(customerId:any){
-    return this.myclient.get(`${this.BaseUrl}Customer/${customerId}`)
+   GetCustomer(){
+    return this.myclient.get(`${this.BaseUrl}Customer/GetByOne`)
    }
 
    PlaceOrder(order:Order){
@@ -23,6 +23,6 @@ export class CheckOutService {
    }
    
    ClearCartProducts(customerId:any[]){
-      return this.myclient.delete(`${this.BaseUrl}Cart/Clear/${customerId}`)
+      return this.myclient.delete(`${this.BaseUrl}Cart`)
    }
 }

@@ -56,47 +56,47 @@
 <div class="container-fluid">
   <div class="row">
     <div class="sidebar col-3">
-      <label for="dropdown-1" class="dropdown-btn">Category</label>
-      <input type="checkbox" id="dropdown-1" class="dropdown-checkbox">
-      <div class="dropdown-container">
-        <a href="#">Man</a>
-        <a href="#">Women</a>
-        <a href="#">Kids</a>
-      </div>
+      <form>
+        <label for="dropdown-1" class="dropdown-btn">Product Type</label>
+        <input type="checkbox" id="dropdown-1" class="dropdown-checkbox">
+        <div class="dropdown-container">
+          <a (click)="subId(category.id)" *ngFor="let category of subCategories">{{category.name}}</a>
+        </div>
 
-      <label for="dropdown-2" class="dropdown-btn">Product Type</label>
-      <input type="checkbox" id="dropdown-2" class="dropdown-checkbox">
-      <div class="dropdown-container">
-        <a href="#">T-shirt</a>
-        <a href="#">Pants</a>
-      </div>
+        <!-- <label for="dropdown-2" class="dropdown-btn">Product Type</label>
+        <input type="checkbox" id="dropdown-2" class="dropdown-checkbox">
+        <div class="dropdown-container">
+          <a href="#">T-shirt</a>
+          <a href="#">Pants</a>
+        </div> -->
 
-      <label for="dropdown-3" class="dropdown-btn">Color</label>
-      <input type="checkbox" id="dropdown-3" class="dropdown-checkbox">
-      <div class="dropdown-container">
-        <a href="#">Red</a>
-        <a href="#">Blue</a>
-        <a href="#">Green</a>
-      </div>
-      <label for="dropdown-3" class="dropdown-btn">Size</label>
-      <input type="checkbox" id="dropdown-3" class="dropdown-checkbox">
-      <div class="dropdown-container">
-        <a href="#">S</a>
-        <a href="#">M</a>
-        <a href="#">L</a>
-      </div>
-      <button
-        style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
-        onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
-        onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
-        Filter
-      </button><br><br>
-      <button 
-      style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
-      onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
-      onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
-        Clear
-      </button>
+        <label for="dropdown-3" class="dropdown-btn">Color</label>
+        <input type="checkbox" id="dropdown-3" class="dropdown-checkbox">
+        <div class="dropdown-container">
+          <a (click)="color(col)" *ngFor="let col of Colors">{{col}}</a>
+
+        </div>
+
+        <label for="dropdown-4" class="dropdown-btn">Size</label>
+        <input type="checkbox" id="dropdown-4" class="dropdown-checkbox">
+        <div class="dropdown-container">
+          <a (click)="size(si)" *ngFor="let si of Sizes">{{si}}</a>
+
+        </div>
+
+        <button type="submit" (click)="Filter()"
+          style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
+          onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
+          onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
+          Filter
+        </button><br><br>
+        <button (click)="GetAll()"
+          style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
+          onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
+          onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
+          Clear
+        </button>
+      </form>
     </div>
 
     <div class="col-8">

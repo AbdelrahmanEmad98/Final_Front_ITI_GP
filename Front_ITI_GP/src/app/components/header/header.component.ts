@@ -15,13 +15,6 @@ export class HeaderComponent implements OnInit {
   public customer: any;
 
   ngOnInit(): void {
-    this.customerService.GetCustomer().subscribe(
-      (data) => {
-        this.customer = data;
-      },
-      (error) => {}
-    );
-
     this.customerService.isLoggedIn$.subscribe(
       (logIn) => {
         this.isLoggedIn = logIn;
@@ -29,6 +22,18 @@ export class HeaderComponent implements OnInit {
       },
       (error) => {}
     );
+    this.customerService.GetCustomer().subscribe(
+      (data) => {
+        this.customer = data;
+      },
+      (error) => {}
+    );
+  }
+
+  logOut() {
+    this.customerService.logout();
+
+    this.isLoggedIn = false;
   }
 
   //   GetData() {

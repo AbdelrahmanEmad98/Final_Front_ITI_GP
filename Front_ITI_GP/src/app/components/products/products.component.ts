@@ -40,43 +40,54 @@ export class ProductsComponent implements OnInit {
   CategoryId = this.route.snapshot.params['id'];
   subCategories: any;
   productsofSub: any;
+  arrrry: [] = [];
   subCategoryId: any;
   Color: any;
   Size: any;
-  originSubCateories:any;
-  originproducts:any;
-  Images:any;
+  originSubCateories: any;
+  originproducts: [] = [];
+  Images: any;
 
-  filter :Filter ={
-    subCategories : [],
-    color : [],
-    size :[],
-  }
+  filter: Filter = {
+    subCategories: [],
+    color: [],
+    size: [],
+  };
 
   async ngOnInit() {
     this.myService.getSubcategories(this.CategoryId).subscribe({
       next: (res) => {
         this.originSubCateories = res;
-        this.subCategories=this.originSubCateories.filter(()=>true) ;
-        this.originproducts =this.originSubCateories.map((p: { products: any; })=>p.products).filter((p: any) => (!isEmptyObject(p))).filter(()=>true)[0];
-        console.log("aaaa")
-        console.log(this.originSubCateories)
-        console.log(this.originproducts)
+        this.subCategories = this.originSubCateories.filter(() => true);
+        this.originproducts = this.originSubCateories
+          .map((p: { products: any }) => p.products)
+          .filter((p: any) => !isEmptyObject(p));
+        console.log('aaaa');
+        console.log(this.originSubCateories);
+        console.log(this.originproducts);
         //this.subCategories = [...this.originSubCateories];
         //this.productsofSub = [...this.subCategories.map((p: { products: any; })=>p.products).filter((p: any) => (!isEmptyObject(p)))];
-        this.productsofSub = this.originproducts.filter(()=>true) ; 
-        console.log("ressssssssss");
+        this.productsofSub = this.originproducts.map((p) => p);
+        console.log('ressssssssss');
         console.log(this.subCategories);
         console.log(this.productsofSub);
+        const arrrry = [].concat(...this.productsofSub);
+        this.productsofSub = arrrry;
+        /*for(let i=0 ;i<this.productsofSub;i++){
+          for(let y=0 ;y<this.productsofSub;y++){
+
+          this.arrrry.push(this.productsofSub[i])
+        }*/
+        console.log(arrrry);
       },
       error: (err) => {
         console.log(err);
       },
     });
-    
+
     //this.GetAll();
   }
-  
+
   getProductsbyCategory(subcategoryId: string) {
     this.myService.getProductsbyCategory(subcategoryId).subscribe({
       next: (res) => {
@@ -106,9 +117,7 @@ export class ProductsComponent implements OnInit {
   }*/
 
   subId(e: any) {
-    
-
-   // this.subCategoryId = subId;
+    // this.subCategoryId = subId;
   }
 
   color(col: any) {
@@ -168,130 +177,137 @@ export class ProductsComponent implements OnInit {
   //     });
   // }
 
-
-  fiterdataBySubCategory(e:any){
-    if(this.filter.subCategories.includes(e.target.value)){
-    let index =this.filter.subCategories.indexOf(e.target.value)
-    if (this.filter.subCategories !== -1) {
-      this.filter.subCategories.splice(index, 1);
-    }
-    
-
-    }else{
+  fiterdataBySubCategory(e: any) {
+    if (this.filter.subCategories.includes(e.target.value)) {
+      let index = this.filter.subCategories.indexOf(e.target.value);
+      if (this.filter.subCategories !== -1) {
+        this.filter.subCategories.splice(index, 1);
+      }
+    } else {
       this.filter.subCategories.push(e.target.value);
     }
     console.log(this.filter);
   }
 
-
-  fiterdataByColor(e:any){
+  fiterdataByColor(e: any) {
     console.log(e.target);
-    
-    if(this.filter.color.includes(e.target.value)){
-      let index =this.filter.color.indexOf(e.target.value)
+
+    if (this.filter.color.includes(e.target.value)) {
+      let index = this.filter.color.indexOf(e.target.value);
       if (this.filter.color !== -1) {
         this.filter.color.splice(index, 1);
       }
-    }else{
+    } else {
       console.log(this.filter);
 
-      this.filter.color.push(e.target.value)
+      this.filter.color.push(e.target.value);
     }
     console.log(this.filter);
   }
 
-
-  fiterdataBySize(e:any){
+  fiterdataBySize(e: any) {
     console.log(e.target.value);
-    if(this.filter.size.includes(e.target.value)){
-      let index =this.filter.size.indexOf(e.target.value)
+    if (this.filter.size.includes(e.target.value)) {
+      let index = this.filter.size.indexOf(e.target.value);
       if (this.filter.size !== -1) {
         this.filter.size.splice(index, 1);
       }
-
-    }else{
-
-      this.filter.size.push(e.target.value)
+    } else {
+      this.filter.size.push(e.target.value);
     }
     console.log(this.filter);
   }
 
-  FilterCombo(){
-let categorycheck:Boolean= this.originSubCateories.map((c: { id: any; })=>c.id).some((item: any)=>this.filter.subCategories.includes(item));
+  FilterCombo() {
+    console.log('filterrrrr');
+    const arrya = [];
+    let categorycheck: Boolean = this.originSubCateories
+      .map((c: { id: any }) => c.id)
+      .some((item: any) => this.filter.subCategories.includes(item));
 
-    //console.log(!isEmptyObject(this.filter.subCategories))
-    console.log("cccccccccc"+categorycheck)
-    console.log(this.originSubCateories.map((c: { id: any; })=>c.id))
-    console.log(this.filter.subCategories)
-    if(!isEmptyObject(this.filter.subCategories)){
-    this.subCategories = this.originSubCateories.filter((c: { id: any; })=>this.filter.subCategories.includes(c.id));
-    this.productsofSub = this.subCategories.map((c: { products: any; })=>c.products).filter((p: any)=>!isEmptyObject(p))[0];
-    console.log("sas");
-    console.log(this.subCategories);
-    console.log(this.productsofSub);
-    //this.productsofSub = this.originproducts.;
+    console.log('cccccccccc' + categorycheck);
+    console.log(this.originSubCateories.map((c: { id: any }) => c.id));
+    console.log(this.filter.subCategories);
+    if (!isEmptyObject(this.filter.subCategories)) {
+      this.subCategories = this.originSubCateories.filter((c: { id: any }) =>
+        this.filter.subCategories.includes(c.id)
+      );
+      console.log('rtrtr');
+      this.productsofSub = [].concat(
+        ...this.subCategories
+          .map((c: { products: any }) => c.products)
+          .filter((p: any) => !isEmptyObject(p))
+      );
+      console.log('sas');
+      console.log(this.subCategories);
+      console.log(this.productsofSub);
+      //this.productsofSub = this.originproducts.;
 
-    this.checkcolorSize();
-    console.log("Cate")  
-    console.log(this.subCategories);  
-    console.log(this.productsofSub);  
-    
-  }else{
-    this.subCategories = this.originSubCateories;
-    console.log(this.subCategories); 
-    this.productsofSub = this.subCategories.map((p: { products: any; })=>p.products).filter((p: any)=>!isEmptyObject(p))[0];
-    console.log("Cate2")  
-    console.log(this.productsofSub); 
-    this.checkcolorSize();
+      this.checkcolorSize();
+      console.log('Cate');
+      console.log(this.subCategories);
+      console.log(this.productsofSub);
+    } else {
+      this.subCategories = this.originSubCateories;
+      console.log(this.subCategories);
+      console.log('Cate2');
+      this.productsofSub = [].concat(
+        ...this.subCategories
+          .map((p: { products: any }) => p.products)
+          .filter((p: any) => !isEmptyObject(p))
+      );
+      console.log(this.productsofSub);
+      this.checkcolorSize();
 
-    console.log(this.subCategories);  
-    console.log(this.productsofSub); 
-  }
-  //if(!isEmptyObject(this.filter.color)){
-  //this.productsofSub = this.productsofSub.filter((p: any)=>!isEmptyObject(p)).filter((p: { color: any; })=>this.filter.color.includes(p.color))[0];
-  //}
-  }
-
-
-  checkcolorSize(){
-console.log("Sub Filter")
-let colorcheck:Boolean= this.productsofSub[0].productInfo.map((x: { color: any; })=>x.color).some((item: any)=>this.filter.color.includes(item));
-let sizecheck :Boolean= this.productsofSub[0].productInfo.map((x: { size : any; })=>x.size).some((item: any)=>this.filter.size.includes(item));
-console.log(colorcheck)
-console.log(sizecheck)
-    if(!isEmptyObject(this.filter.color)&&!isEmptyObject(this.filter.size)){
-      this.productsofSub = this.productsofSub.filter(()=> colorcheck && sizecheck);
-      console.log(this.productsofSub)
-
-    }else if(!isEmptyObject(this.filter.color)){
-      console.log(typeof colorcheck )
-      this.productsofSub = this.productsofSub.filter(()=>colorcheck)[0];
-      console.log(this.productsofSub)
-    }else if(!isEmptyObject(this.filter.size)){
-      this.productsofSub = this.productsofSub.filter(()=>sizecheck);
-      console.log(this.productsofSub)
-    
+      console.log(this.subCategories);
+      console.log(this.productsofSub);
     }
-
+    //if(!isEmptyObject(this.filter.color)){
+    //this.productsofSub = this.productsofSub.filter((p: any)=>!isEmptyObject(p)).filter((p: { color: any; })=>this.filter.color.includes(p.color))[0];
+    //}
   }
 
-
-  clear(e:any){
-    
-    this.filter={
-      subCategories : [],
-      color : [],
-      size :[],
+  checkcolorSize() {
+    console.log('Sub Filter');
+    let colorcheck: Boolean = this.productsofSub[0].productInfo
+      .map((x: { color: any }) => x.color)
+      .some((item: any) => this.filter.color.includes(item));
+    let sizecheck: Boolean = this.productsofSub[0].productInfo
+      .map((x: { size: any }) => x.size)
+      .some((item: any) => this.filter.size.includes(item));
+    console.log(colorcheck);
+    console.log(sizecheck);
+    if (!isEmptyObject(this.filter.color) && !isEmptyObject(this.filter.size)) {
+      this.productsofSub = this.productsofSub.filter(
+        () => colorcheck && sizecheck
+      );
+      console.log(this.productsofSub);
+    } else if (!isEmptyObject(this.filter.color)) {
+      console.log(typeof colorcheck);
+      this.productsofSub = this.productsofSub.filter(() => colorcheck)[0];
+      console.log(this.productsofSub);
+    } else if (!isEmptyObject(this.filter.size)) {
+      this.productsofSub = this.productsofSub.filter(() => sizecheck);
+      console.log(this.productsofSub);
     }
+  }
 
-  this.subCategories = this.originSubCateories.filter((c: { id: any; })=>this.filter.subCategories.includes(c.id));
-  this.productsofSub = this.originproducts;
-    const x=e.target.parentElement;
-    const checkboxes = x.getElementsByClassName("removecheckbox");
-  for (let i = 0; i < checkboxes.length; i++) {
-    const checkbox = checkboxes[i] as HTMLInputElement;
-    checkbox.checked = false;
+  clear(e: any) {
+    this.filter = {
+      subCategories: [],
+      color: [],
+      size: [],
+    };
 
-}
-}
+    this.subCategories = this.originSubCateories.filter((c: { id: any }) =>
+      this.filter.subCategories.includes(c.id)
+    );
+    this.productsofSub = this.originproducts;
+    const x = e.target.parentElement;
+    const checkboxes = x.getElementsByClassName('removecheckbox');
+    for (let i = 0; i < checkboxes.length; i++) {
+      const checkbox = checkboxes[i] as HTMLInputElement;
+      checkbox.checked = false;
+    }
+  }
 }

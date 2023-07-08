@@ -52,7 +52,7 @@
                       <div class="form-floating">
                         <input [(ngModel)]="mname" (keypress)="keyPressMinLength($event,15)" type="text"
                           class="form-control" id="mname" placeholder="Middle Name">
-                          <label for="mname" class="form-label">First name</label>
+                          <label for="mname" class="form-label">Middle name</label>
 
                       </div>
                     </div>
@@ -64,7 +64,7 @@
                       <div class="form-floating">
                         <input #lname formControlName="lname" (keypress)="keyPressMinLength($event,15)" type="text"
                           class="form-control" id="lname" placeholder="Last name" required>
-                          <label for="lname" class="form-label">First name</label>
+                          <label for="lname" class="form-label">Last name</label>
 
                         <div class="form-control-feedback"
                           *ngIf="validFrm.get('lname')?.errors && (validFrm.get('lname')?.dirty || validFrm.get('lname')?.touched)">
@@ -211,25 +211,7 @@
                   </div> 
 
 
-                  <!-- Register buttons -->
-                  <div class="text-center">
-                    <p>or sign up with:</p>
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                      <i class="fab fa-facebook-f" style="color: black;"></i>
-                    </button>
                   
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                      <i class="fab fa-google" style="color: black;"></i>
-                    </button>
-                  
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                      <i class="fab fa-twitter" style="color: black;"></i>
-                    </button>
-                  
-                    <button type="button" class="btn btn-link btn-floating mx-1">
-                      <i class="fab fa-github" style="color: black;"></i>
-                    </button>
-                  </div>
                   
                 </form>
               </div>

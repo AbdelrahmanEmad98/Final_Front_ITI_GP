@@ -58,12 +58,12 @@ export class ProductsComponent implements OnInit {
     this.myService.getSubcategories(this.CategoryId).subscribe({
       next: (res) => {
         this.originSubCateories = res;
-        this.subCategories = this.originSubCateories.filter(() => true);
+        this.subCategories = this.originSubCateories;
+        console.log(this.subCategories);
         this.originproducts = this.originSubCateories
           .map((p: { products: any }) => p.products)
           .filter((p: any) => !isEmptyObject(p));
         console.log('aaaa');
-        console.log(this.originSubCateories);
         console.log(this.originproducts);
         //this.subCategories = [...this.originSubCateories];
         //this.productsofSub = [...this.subCategories.map((p: { products: any; })=>p.products).filter((p: any) => (!isEmptyObject(p)))];
@@ -78,7 +78,7 @@ export class ProductsComponent implements OnInit {
 
           this.arrrry.push(this.productsofSub[i])
         }*/
-        console.log(arrrry);
+        console.log(this.productsofSub);
       },
       error: (err) => {
         console.log(err);
@@ -269,9 +269,19 @@ export class ProductsComponent implements OnInit {
 
   checkcolorSize() {
     console.log('Sub Filter');
-    let colorcheck: Boolean = this.productsofSub[0].productInfo
+    console.log(this.productsofSub);
+    console.log(
+      this.productsofSub.map((p: { productImages: any }) => p.productImages)
+    );
+    console.log(
+      []
+        .concat(...this.productsofSub)
+        .map((p: { productInfo: any }) => p.productInfo)
+    );
+    let colorcheck: Boolean = this.productsofSub.productInfo
       .map((x: { color: any }) => x.color)
       .some((item: any) => this.filter.color.includes(item));
+
     let sizecheck: Boolean = this.productsofSub[0].productInfo
       .map((x: { size: any }) => x.size)
       .some((item: any) => this.filter.size.includes(item));

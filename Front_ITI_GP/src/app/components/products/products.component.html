@@ -171,14 +171,14 @@
                     </div>
                   </ul>
 
-                  <li style="list-style-type: none" class="my-1">
-                    <i class="text-warning fa fa-star"></i>
-                    <i class="text-warning fa fa-star"></i>
-                    <i class="text-warning fa fa-star"></i>
-                    <i class="text-muted fa fa-star"></i>
-                    <i class="text-muted fa fa-star"></i>
-                  </li>
-                  <a class="h6 text-decoration-none text-dark my-1">{{
+                  <p>
+                    <rating [(ngModel)]="product.rate" [max]="5" [readonly]="true"
+                      [titles]="['one', 'two', 'three', 'four', 'five']" fullIcon="fa fa-star" emptyIcon="fa fa-star-o"
+                      halfIcon="fa fa-star-half" class="text-warning fs-3 me-2 ">
+                    </rating>
+                  </p>
+
+                  <a class="h6 text-decoration-none text-dark ">{{
                     product.name
                     }}</a>
                   <p class="card-text small text-muted">

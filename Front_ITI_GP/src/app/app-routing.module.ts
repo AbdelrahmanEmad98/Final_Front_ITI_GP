@@ -16,6 +16,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProfileInfoComponent } from './components/ProfileInfo/profile-info.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,6 +32,9 @@ const routes: Routes = [
   { path: 'products/Details/:id', component: ProductDetailsComponent },
   { path: 'wishList', component: WishListComponent },
   { path: 'resetPassword', component: ResetPasswordComponent },
+  { path: 'orderDetails', component: OrderDetailsComponent },
+  { path: 'changePassword', component: ResetPasswordComponent },
+
   // =====================================
 
   {

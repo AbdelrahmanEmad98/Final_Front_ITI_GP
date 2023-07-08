@@ -14,7 +14,7 @@ export class ResetPasswordComponent {
   displayAlert = 'd-none';
   FlagError = false;
 
-  constructor(protected _ser: CustomerService ,private router: Router) {}
+  constructor(protected _ser: CustomerService, private router: Router) {}
 
   passFrm = new FormGroup({
     password: new FormControl('', [
@@ -87,7 +87,6 @@ export class ResetPasswordComponent {
     } else if (this.passFrm.valid) {
       this._ser
         .ResetPassword({
-          id: '74a1d7ea-054c-4944-9351-553b232ea6df',
           currentPassword: this.passFrm.value.password,
           newPassword: this.passFrm.value.npassword,
         })

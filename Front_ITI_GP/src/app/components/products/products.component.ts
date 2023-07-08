@@ -61,7 +61,7 @@ export class ProductsComponent implements OnInit {
         this.originproducts =this.originSubCateories.map((p: { products: any; })=>p.products).filter((p: any) => (!isEmptyObject(p))).filter(()=>true)[0];
         console.log("aaaa")
         console.log(this.originSubCateories)
-        console.log(this.subCategories)
+        console.log(this.originproducts)
         //this.subCategories = [...this.originSubCateories];
         //this.productsofSub = [...this.subCategories.map((p: { products: any; })=>p.products).filter((p: any) => (!isEmptyObject(p)))];
         this.productsofSub = this.originproducts.filter(()=>true) ; 

@@ -59,10 +59,10 @@
     
       <form>
         <!--Abdo-->
-        <label for="dropdown-1" class="dropdown-btn">Product Type</label>
+        <label for="dropdown-1" class="dropdown-btn mb-1">Product Type</label>
         <input type="checkbox" id="dropdown-1" class="dropdown-checkbox">
         <div class="dropdown-container">
-          <div *ngFor="let category of originSubCateories">
+          <div *ngFor="let category of originSubCateories" class="ms-3">
             <input class="removecheckbox " type="checkbox" (click)="fiterdataBySubCategory($event)"  [value]="category.id">
             <label [for]="category.name"> {{category.name}}</label><br>
 
@@ -73,20 +73,20 @@
         <label for="dropdown-2" class="dropdown-btn">Color</label>
         <input type="checkbox" id="dropdown-2" class="dropdown-checkbox">
         <div class="dropdown-container">
-          <div *ngFor="let col of Colors">
+          <div *ngFor="let col of Colors" class="ms-3">
             <input class="removecheckbox "type="checkbox" (click)="fiterdataByColor($event)"  [value]="col">
-            <label [for]="col"> {{col}}</label><br>
+            <label class="ms-1"[for]="col"> {{col}}</label><br>
 
           </div>
         </div>
 
 
-        <label for="dropdown-3" class="dropdown-btn">Size</label>
+        <label for="dropdown-3" class="dropdown-btn mb-2">Size</label>
         <input type="checkbox" id="dropdown-3" class="dropdown-checkbox">
         <div class="dropdown-container">
-          <div *ngFor="let si of Sizes">
+          <div *ngFor="let si of Sizes"class="ms-3">
             <input class="removecheckbox "type="checkbox" (click)="fiterdataBySize($event)"  [value]="si">
-            <label [for]="si"> {{si}}</label><br>
+            <label class="ms-1" [for]="si"> {{si}}</label><br>
 
           </div>
         </div>
@@ -114,13 +114,14 @@
         </div>
       -->
         <button type="submit" (click)="FilterCombo()"
-          style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
+          class="mt-4 btn btn-info bg-info"style=" width: 100%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
           onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
           onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
           Filter
-        </button><br><br>
+        </button>
         <button (click)="clear($event)"
-          style="width: 60%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
+        class="mt-2 btn btn-info bg-secondary  "
+          style="width: 100%; padding: 8px 16px; font-size: 16px; border: none; background-color: #f1f1f1; color: #333; cursor: pointer; outline: none;"
           onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
           onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
           Clear

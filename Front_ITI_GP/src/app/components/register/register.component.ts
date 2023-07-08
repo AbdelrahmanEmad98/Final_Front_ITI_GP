@@ -67,6 +67,7 @@ export class RegisterComponent {
 
   AddNewCustomer() {
     if (this.validFrm.invalid) {
+      
       // Display error messages
       Object.keys(this.validFrm.controls).forEach((field) => {
         if (field != 'mname') {
@@ -100,6 +101,7 @@ export class RegisterComponent {
           error: (error: HttpErrorResponse) => {
             let errorMessage = 'An error occurred';
             if (error.error instanceof Array) {
+              console.log(errorMessage);
               errorMessage = error.error
                 .map((err: any) => err.description)
                 .join(',');

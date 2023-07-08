@@ -1,3 +1,6 @@
+body {
+  overflow: hidden;
+}
 
 .button {
   display: flex;
@@ -40,7 +43,6 @@
   }
 }
 
-
 .Details:hover {
   background: #e52e26;
 }
@@ -76,7 +78,6 @@
   animation-name: none;
 }
 
-
 .custom-button {
   position: relative;
   overflow: hidden;
@@ -111,7 +112,6 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-
 }
 
 .product-card:hover {
@@ -208,13 +208,19 @@ body {
   letter-spacing: 0.03rem;
 }
 
-
 .sidebar {
   width: 250px;
   height: 100%;
   background-color: #333;
   color: #fff;
   padding: 20px;
+  left: 0;
+  top: 100;
+  overflow: hidden;
+}
+
+.custom-width {
+  width: 33%;
 }
 
 .dropdown-btn {
@@ -229,7 +235,6 @@ body {
   outline: none;
   color: #fff;
   text-align: left;
- 
 }
 
 .dropdown-container {
@@ -265,5 +270,3 @@ body {
     padding: 10px;
   }
 }
-
-

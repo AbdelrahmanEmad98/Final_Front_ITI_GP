@@ -95,20 +95,31 @@
                   <ul class="list-inline pb-3 h6">
                     Available Color :
                     <li class="list-inline-item" *ngFor="let info of product.productInfo">
-                      <button #color class="btn btn-outline-dark" [ngStyle]="{ 'background-color': info.color, 'font-size':0 }" value="{{ info.color }}" (click)="Sizes(color.value)"
+                      <!-- <button #color class="btn btn-outline-dark" [ngStyle]="{ 'background-color': info.color, 'font-size':0 }" value="{{ info.color }}" (click)="Sizes(color.value)"
                         [ngClass]="{ active: info.color === selectedColor }" (click)="selectColor(info.color)">
                         {{ info.color }}
+                      </button> -->
+                      <button #color class="btn btn-outline-dark selecedBtn"
+                        [ngStyle]="{ 'background-color': info.color, 'font-size':0 }" value="{{ info.color }}"
+                        (click)="Sizes(color.value)"
+                        [ngClass]="{ active: info.color === selectedColor ,'selected': info.color === selectedColor}"
+                        (click)="selectColor(info.color)">
+                        {{ info.color }}
                       </button>
+                      <!-- <button #color class="btn btn-outline-dark" value="{{ info.color }}" (click)="Sizes(color.value)"
+                        [ngClass]="{ active: info.color === selectedColor }" (click)="selectColor(info.color)">
+                        {{ info.color }}
+                      </button> -->
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="row">
-                <div class="col-auto">
+                <div class="col-6">
                   <ul class="list-inline pb-3 h6">
                     Size :
                     <li class="list-inline-item" *ngFor="let info of ColorSizes.sizeQuantities">
-                      <button #size class="btn btn-outline-dark" style="width: 45px" value="{{ info.size }}"
+                      <button #size class="btn btn-outline-dark" value="{{ info.size }}"
                         (click)="QuantityCheck($event, size.value)" (click)="selectSize(info.size)"
                         [ngClass]="{ active: info.size === selectedSize }">
                         {{ info.size }}
@@ -116,9 +127,9 @@
                     </li>
                   </ul>
                 </div>
-                <div class="col-auto">
+                <div class="col-6">
                   <ul class="list-inline pb-3">
-                    <li class="list-inline-item text-right">
+                    <li class="list-inline-item text-right h6">
                       Quantity
                       <input type="hidden" name="product-quanity" id="product-quanity" value="1" />
                     </li>
@@ -157,14 +168,14 @@
   </div>
   <div class="modal fade" id="AddedToCartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" >
-            
-            <div class="modal-body">
-              <h1 class="fs-5 text-success text-center" id="exampleModalLabel">Added To Cart</h1>
-            </div>
-           
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <h1 class="fs-5 text-success text-center" id="exampleModalLabel">Added To Cart</h1>
         </div>
+
+      </div>
     </div>
-</div>
+  </div>
 
 </section>

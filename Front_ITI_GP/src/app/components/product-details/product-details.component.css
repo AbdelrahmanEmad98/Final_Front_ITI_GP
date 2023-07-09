@@ -27,3 +27,14 @@
   transform: translateY(0);
   opacity: 1;
 }
+
+.selecedBtn.selected {
+  border: 3px solid;
+  border-color: black;
+}
+.selecedBtn {
+  border: 2px solid white;
+  padding: 12px;
+  margin: 5px;
+  border-radius: 50%;
+}

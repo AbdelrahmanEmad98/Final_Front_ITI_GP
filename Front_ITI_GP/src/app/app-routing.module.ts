@@ -21,7 +21,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'category/:id', component: ProductsComponent },
+  { path: 'category/:id', component: ProductsComponent},
   { path: 'cart/:id',canActivate: [authenticationGuard], component: CartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

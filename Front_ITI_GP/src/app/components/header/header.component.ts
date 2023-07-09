@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CustomerService } from 'src/app/services/Customer/customer.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private customerService: CustomerService) {}
+  constructor(private customerService: CustomerService,private router: Router) {}
   // private checkLogin = inject(CustomerService);
 
   public isLoggedIn: boolean = false;
@@ -46,4 +47,26 @@ export class HeaderComponent implements OnInit {
   //       );
   //     }
   //   }
+  @ViewChild('selectList') selectList: any;
+  Go(e:any){
+
+    console.log("*********")
+    console.log(e.target.value)
+    if(e.target.value == 1){
+
+      this.router.navigate(["category/712289e5-c634-4435-ae55-0df58818f469"]);
+      this.selectList.nativeElement.selectedIndex = 0;
+    }
+    else if(e.target.value == 2){
+
+      this.router.navigate(['category/e0e9459f-dd0e-48d8-865c-0e2fcd325d29']);
+      this.selectList.nativeElement.selectedIndex = 0;
+    }
+
+    else if(e.target.value == 3){
+
+      this.router.navigate(["category/d02de315-c29a-4d57-92f6-0e6892a491ba"]);
+      this.selectList.nativeElement.selectedIndex = 0;
+    }
+  }
 }

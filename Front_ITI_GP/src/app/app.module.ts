@@ -62,6 +62,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     ProfileComponent,
     ProfileInfoComponent,
     OrderDetailsComponent,
+    
   ],
   imports: [
     BrowserModule,

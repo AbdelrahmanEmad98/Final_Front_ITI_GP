@@ -59,14 +59,14 @@ export class CartComponent implements OnInit {
   calculateTotalPrice() {
     if (this.cartItems.length != 0) {
       this.totalPriceBefore = this.cartItems.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
+        (total, item) => total + item.price * item.quantity, 0);
       this.cartItems.forEach((c) => {
         if (c.discount == 0) {
-          this.totalPriceAfter = c.price * c.quantity;
+          this.totalPriceAfter = this.cartItems.reduce(
+            (total, item) => total + item.price * item.quantity, 0);
         } else {
-          this.totalPriceAfter = c.price * c.quantity * (1 - c.discount);
+          this.totalPriceAfter = this.cartItems.reduce(
+            (total, item) => total + item.price * item.quantity * (1-item.discount), 0);
           console.log(c.discount);
         }
       });

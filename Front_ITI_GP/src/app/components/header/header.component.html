@@ -16,9 +16,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink=""><i class="fas fa-home"></i> Home</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" routerLink="" style="font-size: 16px"><i class="fas fa-shopping-bag"></i> Shop</a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a class="nav-link" routerLink="/cart" style="font-size: 16px"><i class="fas fa-shopping-cart"></i> Cart</a>
@@ -44,7 +44,7 @@
           </li>
 
           <!-- Logged In -->
-          <li class="nav-item" *ngIf="isLoggedIn">
+          <li class="nav-item" *ngIf="isLoggedIn && customer">
             <a class="nav-link ">{{ customer.firstName }} {{ customer.lastName }}</a>
           </li>
           <li class="nav-item" *ngIf="isLoggedIn">

@@ -95,8 +95,8 @@
                   <ul class="list-inline pb-3 h6">
                     Available Color :
                     <li class="list-inline-item" *ngFor="let info of product.productInfo">
-                      <button #color class="btn btn-outline-dark" [ngStyle]="{ 'background-color': info.color, 'font-size':0 }" value="{{ info.color }}" (click)="Sizes(color.value)"
-                        [ngClass]="{ active: info.color === selectedColor }" (click)="selectColor(info.color)">
+                      <button #color class="btn btn-outline-dark selecedBtn" [ngStyle]="{ 'background-color': info.color, 'font-size':0 }" value="{{ info.color }}" (click)="Sizes(color.value)"
+                        [ngClass]="{ active: info.color === selectedColor ,'selected': info.color === selectedColor}" (click)="selectColor(info.color)">
                         {{ info.color }}
                       </button>
                     </li>

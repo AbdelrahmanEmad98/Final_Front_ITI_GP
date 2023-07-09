@@ -1,10 +1,10 @@
-import { Component, OnInit, enableProdMode } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, enableProdMode } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CheckOutService } from 'src/app/services/check-out.service';
 import { NgModule } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Order } from 'src/app/Models/Order';
-
+import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
@@ -30,7 +30,9 @@ export class CheckOutComponent implements OnInit {
     }]
   };
 cost:any;
-  constructor(private service: CheckOutService, private route: ActivatedRoute, private router: Router) {
+  constructor(private service: CheckOutService, private route: ActivatedRoute, private router: Router,
+    private renderer: Renderer2, private el: ElementRef
+              ) {
     this.ID = route.snapshot.params["id"]
   }
 
@@ -123,8 +125,19 @@ cost:any;
       ///////////1- Check Quantity Valid & Added Order & Decrease Quantity && 4- Delete Cart  //////////
       this.service.PlaceOrder(this.order).subscribe({
         next:(data)=>{
-          this.router.navigate(["/"])
+          const modalElement = this.el.nativeElement.querySelector('#confirmationModal');
           
+          const modal = new bootstrap.Modal(modalElement);
+          this.renderer.addClass(modalElement, 'show');
+          this.renderer.setStyle(modalElement, 'display', 'block');
+          modal.show();
+      
+      setTimeout(() => {
+        this.renderer.removeClass(modalElement, 'show');
+        this.renderer.setStyle(modalElement, 'display', 'none');
+        modal.hide();
+        this.router.navigate(["/"])
+      }, 4000);          
         },
         error:(error1)=> {console.log("notAdded")}
       })

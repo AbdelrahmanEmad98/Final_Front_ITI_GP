@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsService } from 'src/app/services/Product Details/product-details.service';
 import { Location } from '@angular/common';
 import { error } from 'jquery';
 import { WishListService } from 'src/app/services/wish-list.service';
+import * as bootstrap from 'bootstrap';
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -15,7 +17,8 @@ export class ProductDetailsComponent implements OnInit {
     private urlData: ActivatedRoute,
     private location: Location,
     private route: Router,
-    private wishListService: WishListService
+    private wishListService: WishListService,
+    private renderer: Renderer2, private el: ElementRef
   ) {}
   productId = this.urlData.snapshot.params['id'];
 
@@ -97,6 +100,19 @@ export class ProductDetailsComponent implements OnInit {
       (response) => {
         // Handle successful response
         console.log(response);
+        const modalElement = this.el.nativeElement.querySelector('#AddedToCartModal');
+          
+        const modal = new bootstrap.Modal(modalElement);
+        this.renderer.addClass(modalElement, 'show');
+        this.renderer.setStyle(modalElement, 'display', 'block');
+        modal.show();
+    
+    setTimeout(() => {
+      this.renderer.removeClass(modalElement, 'show');
+      this.renderer.setStyle(modalElement, 'display', 'none');
+      modal.hide();
+      
+    }, 1000);
       },
       (error) => {
         // Handle error response

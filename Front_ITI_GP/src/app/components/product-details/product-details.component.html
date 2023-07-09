@@ -95,7 +95,7 @@
                   <ul class="list-inline pb-3 h6">
                     Available Color :
                     <li class="list-inline-item" *ngFor="let info of product.productInfo">
-                      <button #color class="btn btn-outline-dark" value="{{ info.color }}" (click)="Sizes(color.value)"
+                      <button #color class="btn btn-outline-dark" [ngStyle]="{ 'background-color': info.color, 'font-size':0 }" value="{{ info.color }}" (click)="Sizes(color.value)"
                         [ngClass]="{ active: info.color === selectedColor }" (click)="selectColor(info.color)">
                         {{ info.color }}
                       </button>
@@ -155,4 +155,16 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="AddedToCartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" >
+            
+            <div class="modal-body">
+              <h1 class="fs-5 text-success text-center" id="exampleModalLabel">Added To Cart</h1>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
 </section>

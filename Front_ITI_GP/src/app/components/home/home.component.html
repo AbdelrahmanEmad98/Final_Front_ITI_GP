@@ -72,9 +72,9 @@
 
 
   <div class="row">
-    <div *ngFor="let c of categories" class="col-12 col-md-4 p-5 mt-3">
+    <div *ngFor="let c of categories" class="col-12 col-md-4 p-5 mt-3" >
       <!-- <a href="#"><img src="../../../assets/category_img_01.jpg" class="rounded-circle img-fluid border"></a> -->
-      <a><img src={{c.image}} class="rounded-circle img-fluid border"></a>
+      <a><img src={{c.image}} class="rounded-circle img-fluid border" style="height: 400px; width: 400px;"></a>
 
       <h2 class="h5 text-center mt-3 mb-3">{{c.name}}</h2>
       <p class="text-center"><a class="btn btn-dark" routerLink="/category/{{c.id}}">Go Shop</a></p>

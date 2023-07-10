@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <label for="dropdown-3" class="dropdown-btn mb-2 mb-1">Size</label>
+        <label for="dropdown-3" class="dropdown-btn mb-2 mb-1 ">Size</label>
         <input type="checkbox" id="dropdown-3" class="dropdown-checkbox" />
         <div class="dropdown-container">
           <div *ngFor="let si of Sizes" class="ms-3">
@@ -107,9 +107,7 @@
 
         </div>
       -->
-      <div class="row mt-4 pt-1">
-        <div class="col-6">
-        <button type="submit" (click)="FilterCombo()" class=" btn btn-info bg-info" style="
+        <button type="submit" (click)="FilterCombo()" class=" btn btn-info bg-info w-100 pt-2" style="
             
             padding: 8px 16px;
             font-size: 16px;
@@ -121,9 +119,8 @@
           " onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
           onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
           Filter
-        </button></div>
-        <div class="col-6">
-        <button (click)="clear($event)" class=" btn btn-info bg-secondary" style="
+        </button>
+        <button (click)="clear($event)" class=" btn btn-info bg-secondary w-100 mt-2" style="
             padding: 8px 16px;
             font-size: 16px;
             border: none;
@@ -134,8 +131,7 @@
           " onmouseover="this.style.backgroundColor='#ccc'; this.style.color='#fff';"
           onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.color='#333';">
           Clear
-        </button></div>
-      </div>
+        </button>
       </form>
     </div>
 

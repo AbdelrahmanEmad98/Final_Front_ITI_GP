@@ -66,7 +66,7 @@ export class CartComponent implements OnInit {
             (total, item) => total + item.price * item.quantity, 0);
         } else {
           this.totalPriceAfter = this.cartItems.reduce(
-            (total, item) => total + item.price * item.quantity * (1-item.discount), 0);
+            (total, item) => total + (item.price * item.quantity * (1-item.discount)), 0);
           console.log(c.discount);
         }
       });

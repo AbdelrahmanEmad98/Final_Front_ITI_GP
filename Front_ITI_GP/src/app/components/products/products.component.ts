@@ -302,18 +302,18 @@ export class ProductsComponent implements OnInit {
   }
 
   clear(e: any) {
+    console.log("after Clearrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
     this.filter = {
       subCategories: [],
       color: [],
       size: [],
     };
-
+console.log("sadsadas")
     this.subCategories = this.originSubCateories;
-    console.log("after Clear");
-    console.log(this.originSubCateories);
-    console.log(this.subCategories);
+    //console.log(this.originSubCateories);
+    //console.log(this.subCategories);
     this.productsofSub = [].concat(...this.originproducts);
-    const x = e.target.parentElement;
+    const x = e.target.parentElement.parentElement;
     const checkboxes = x.getElementsByClassName('removecheckbox');
     for (let i = 0; i < checkboxes.length; i++) {
       const checkbox = checkboxes[i] as HTMLInputElement;
